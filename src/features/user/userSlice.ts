@@ -19,13 +19,21 @@ export const userSlice = createSlice({
     user: initialState
   },
   reducers: {
-    update: (state, action: PayloadAction<User>) => {
-      state.user = action.payload;
+    login: (state, action: PayloadAction<firebase.default.User>) => {
+      const user = action.payload;
+      state.user = {
+        uid: user.uid,
+        displayName: user.displayName || '',
+        photoUrl: user.photoURL || '',
+      }
+    },
+    logout: (state) => {
+      state.user = initialState;
     }
   },
 });
 
-export const { update } = userSlice.actions;
+export const { login, logout } = userSlice.actions;
 
 export const selectUser = (state: RootState) => state.user.user;
 

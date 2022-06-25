@@ -1,11 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
-
-export type User = {
-  uid: string,
-  displayName: string,
-  photoUrl: string,
-};
+import { User } from '../../domain/type/User';
 
 const initialState: User = {
   uid: '',

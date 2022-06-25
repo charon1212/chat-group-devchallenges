@@ -1,9 +1,9 @@
-import { Avatar, Divider, Link, ListItemIcon, Menu, MenuItem, Typography, useTheme } from '@material-ui/core';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import ForumIcon from '@material-ui/icons/Forum';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { Avatar, Divider, Link, ListItemIcon, Menu, MenuItem, Typography, useTheme } from '@mui/material';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import ForumIcon from '@mui/icons-material/Forum';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { useState } from 'react';
 
 type Props = {};
@@ -78,7 +78,7 @@ const SideBar = (props: Props) => {
                 </ListItemIcon>
                 Tweeter
               </MenuItem>
-              <Divider variant='inset' component='li'/>
+              <Divider variant='inset' component='li' />
               <MenuItem>
                 <ListItemIcon>
                   <ExitToAppIcon />

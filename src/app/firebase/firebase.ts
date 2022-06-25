@@ -2,6 +2,9 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/storage';
 import 'firebase/auth';
+import { getAuth } from 'firebase/auth';
+import { getStorage } from 'firebase/storage';
+import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -14,12 +17,12 @@ const firebaseConfig = {
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 
-export const db = firebaseApp.firestore();
-export const auth = firebaseApp.auth();
-export const storage = firebase.storage();
-export const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
+export const db = getFirestore(firebaseApp);
+export const auth = getAuth(firebaseApp);
+export const storage = getStorage(firebaseApp);
+// export const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 
-export const getTimestamp = () => {
-  const t = firebase.firestore.Timestamp;
-  return t.now();
-}
+// export const getTimestamp = () => {
+//   const t = firebase.firestore.Timestamp;
+//   return t.now();
+// }

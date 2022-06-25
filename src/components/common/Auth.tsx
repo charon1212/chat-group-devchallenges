@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 import { login, logout } from '../..//features/user/userSlice';
-import { Redirect } from 'react-router-dom';
 import { auth } from '../../app/firebase/firebase';
 
 type Prop = {
   loginUri: string;
   loadingComponent: React.ComponentType<any>;
+  children: ReactNode;
 };
 
 /**
@@ -74,7 +75,7 @@ const Auth: React.FC<Prop> = (props) => {
   } else if (onSignOut) {
     return <>{props.loadingComponent}</>;
   } else if (!isLogin) {
-    return <Redirect to={props.loginUri} />;
+    return <Navigate to={props.loginUri} />;
   } else {
     return <>{props.children}</>;
   }

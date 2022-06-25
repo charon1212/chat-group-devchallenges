@@ -1,15 +1,15 @@
-import { createMuiTheme, CssBaseline, ThemeProvider } from '@material-ui/core';
-import * as colors from '@material-ui/core/colors';
+import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
+import * as colors from '@mui/material/colors';
 import React from 'react';
 import Main from './components/pages/main/Main';
 
 const App: React.FC = () => {
-  const theme = createMuiTheme({
+  const theme = createTheme({
     palette: {
       primary: {
         main: colors.blue[800],
       },
-      type: 'dark',
+      mode: 'dark',
     },
   });
   return (

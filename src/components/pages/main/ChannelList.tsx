@@ -1,18 +1,8 @@
-import { Add, Search } from '@mui/icons-material';
-import {
-  IconButton,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-  TextField,
-  Typography,
-  FormControl,
-  useTheme,
-  InputAdornment,
-} from '@mui/material';
+import { Add } from '@mui/icons-material';
+import { IconButton, List, ListItem, ListItemButton, ListItemText, Typography, FormControl, useTheme } from '@mui/material';
 import { useAppDispatch } from '../../../app/hooks';
 import { changeChannel } from '../../../features/channel/channelSlice';
+import { useSearchField } from '../../hooks/useSearchField';
 
 type Props = {};
 const ChannelList = (props: Props) => {
@@ -21,6 +11,7 @@ const ChannelList = (props: Props) => {
 
   const sampleChannelArray = [1, 2, 3, 4, 5];
 
+  const { searchWord, searchFieldElement } = useSearchField();
   const dispatch = useAppDispatch();
   const onClickChannel = (i: string) => {
     dispatch(
@@ -47,17 +38,7 @@ const ChannelList = (props: Props) => {
           </div>
         </div>
         <div>
-          <FormControl fullWidth>
-            <TextField
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position='start'>
-                    <Search />
-                  </InputAdornment>
-                ),
-              }}
-            />
-          </FormControl>
+          <FormControl fullWidth>{searchFieldElement}</FormControl>
         </div>
         <List>
           {sampleChannelArray.map((i) => (

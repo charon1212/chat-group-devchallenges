@@ -4,9 +4,7 @@ import { useAppDispatch } from '../../../app/hooks';
 import { changeChannel } from '../../../features/channel/channelSlice';
 import { useSearchField } from '../../hooks/useSearchField';
 
-type Props = {};
-const ChannelList = (props: Props) => {
-  const {} = props;
+const ChannelList = () => {
   const theme = useTheme();
 
   const sampleChannelArray = [1, 2, 3, 4, 5];

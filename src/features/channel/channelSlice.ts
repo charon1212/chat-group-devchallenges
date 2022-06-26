@@ -15,14 +15,14 @@ export const channelSlice = createSlice({
     channel: initialState
   },
   reducers: {
-    select: (state, action: PayloadAction<Channel>) => {
+    changeChannel: (state, action: PayloadAction<Channel>) => {
       const channel = action.payload;
       state.channel = { ...channel };
     },
   },
 });
 
-export const { select } = channelSlice.actions;
+export const { changeChannel } = channelSlice.actions;
 
 export const selectChannel = (state: RootState) => state.channel.channel;
 

@@ -1,5 +1,4 @@
 import { Avatar, Divider, List, ListItem, ListItemAvatar, ListItemText, useTheme } from '@mui/material';
-import { createRef, useEffect } from 'react';
 import { useScrollAt } from '../../hooks/useScrollAt';
 
 type Props = {};
@@ -64,25 +63,6 @@ const DateDivider = () => {
         </tbody>
       </table>
     </>
-  );
-};
-
-const SampleListItem = (props: { index: number; scroll?: boolean }) => {
-  const ref = createRef<HTMLDivElement>();
-  useEffect(() => {
-    if (props.scroll) {
-      ref.current?.scrollIntoView({
-        block: 'end',
-      });
-    }
-  });
-  return (
-    <ListItem alignItems='flex-start'>
-      <ListItemAvatar ref={ref}>
-        <Avatar alt='test' src='https://image.flaticon.com/icons/png/512/147/147144.png' />
-      </ListItemAvatar>
-      <ListItemText primary='Title' secondary={'sample hogehoge' + props.index} />
-    </ListItem>
   );
 };
 

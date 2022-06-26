@@ -31,26 +31,28 @@ const SideBar = () => {
           padding: theme.spacing(1),
         }}
       >
-        {selectChannelUid ? (
-          <>
-            <div style={{ margin: theme.spacing(2), display: 'flex', alignItems:'center' }}>
-              <div>
-                <Link href='#' onClick={linkOnClick}>
-                  {' ＜　'}
-                </Link>
+        <div style={{height: 'auto', overflowY: 'hidden'}}>
+          {selectChannelUid ? (
+            <>
+              <div style={{ margin: theme.spacing(2), display: 'flex', alignItems: 'center' }}>
+                <div>
+                  <Link href='#' onClick={linkOnClick}>
+                    {' ＜　'}
+                  </Link>
+                </div>
+                <div>
+                  <Typography variant='h5'>All channels</Typography>
+                </div>
               </div>
-              <div>
-                <Typography variant='h5'>All channels</Typography>
-              </div>
-            </div>
-            <ChannelDetail />
-          </>
-        ) : (
-          <>
-            <ChannelList />
-          </>
-        )}
-        <div style={{ marginTop: 'auto', backgroundColor: 'black' }}>
+              <ChannelDetail />
+            </>
+          ) : (
+            <>
+              <ChannelList />
+            </>
+          )}
+        </div>
+        <div style={{ marginTop: 'auto', backgroundColor: 'black', flexShrink: 0 }}>
           <UserProfile />
         </div>
       </div>

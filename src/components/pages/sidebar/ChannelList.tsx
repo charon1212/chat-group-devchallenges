@@ -7,7 +7,7 @@ import { useSearchField } from '../../hooks/useSearchField';
 const ChannelList = () => {
   const theme = useTheme();
 
-  const sampleChannelArray = [1, 2, 3, 4, 5];
+  const sampleChannelArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 
   const { searchWord, searchFieldElement } = useSearchField();
   const dispatch = useAppDispatch();
@@ -24,7 +24,7 @@ const ChannelList = () => {
 
   return (
     <>
-      <div>
+      <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <div style={{ margin: theme.spacing(2, 2, 0) }}>
             <Typography variant='h5'>Channels</Typography>
@@ -38,21 +38,23 @@ const ChannelList = () => {
         <div>
           <FormControl fullWidth>{searchFieldElement}</FormControl>
         </div>
-        <List>
-          {sampleChannelArray.map((i) => (
-            <>
-              <ListItem>
-                <ListItemButton
-                  onClick={() => {
-                    onClickChannel(`${i}`);
-                  }}
-                >
-                  <ListItemText primary={`チャンネル${i}`} />
-                </ListItemButton>
-              </ListItem>
-            </>
-          ))}
-        </List>
+        <div style={{ overflowY: 'scroll' }}>
+          <List>
+            {sampleChannelArray.map((i) => (
+              <>
+                <ListItem>
+                  <ListItemButton
+                    onClick={() => {
+                      onClickChannel(`${i}`);
+                    }}
+                  >
+                    <ListItemText primary={`チャンネル${i}`} />
+                  </ListItemButton>
+                </ListItem>
+              </>
+            ))}
+          </List>
+        </div>
       </div>
     </>
   );

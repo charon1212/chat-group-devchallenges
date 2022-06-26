@@ -1,7 +1,7 @@
 import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
 import * as colors from '@mui/material/colors';
 import React from 'react';
-import Main from './components/pages/main/Main';
+import AppRouter from './AppRouter';
 
 const App: React.FC = () => {
   const theme = createTheme({
@@ -15,8 +15,7 @@ const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      {/* <Main /> */}
-      <Main />
+      <AppRouter />
     </ThemeProvider>
   );
 };

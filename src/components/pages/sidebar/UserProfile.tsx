@@ -7,6 +7,7 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { useState } from 'react';
 import { signOut } from 'firebase/auth';
 import { auth } from '../../../app/firebase/firebase';
+import { useUserProfileDialog } from '../../dialogs/useUserProfileDialog';
 
 const UserProfile = () => {
   const theme = useTheme();
@@ -16,6 +17,8 @@ const UserProfile = () => {
     e.preventDefault();
     setAnchorEl(e.currentTarget);
   };
+
+  const { openUserProfileDialog, UserProfileDialog } = useUserProfileDialog();
 
   const signout = () => {
     signOut(auth)
@@ -53,7 +56,11 @@ const UserProfile = () => {
             setAnchorEl(null);
           }}
         >
-          <MenuItem>
+          <MenuItem
+            onClick={() => {
+              openUserProfileDialog();
+            }}
+          >
             <ListItemIcon>
               <AccountCircleIcon />
             </ListItemIcon>
@@ -74,6 +81,7 @@ const UserProfile = () => {
           </MenuItem>
         </Menu>
       </div>
+      {UserProfileDialog}
     </>
   );
 };

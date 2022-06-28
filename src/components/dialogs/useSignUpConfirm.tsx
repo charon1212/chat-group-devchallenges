@@ -58,7 +58,7 @@ export const useSignUpConfirm = () => {
               setPassword('');
             }}
           >
-            キャンセル
+            Cancel
           </Button>
         </DialogActions>
       </Dialog>

@@ -15,7 +15,7 @@ const AppRouter = () => {
             element={
               <>
                 <Auth loginUri={pathSignin} loadingComponent={AuthLoading}>
-                  <Route path={pathTop} element={<Main />} />
+                  <Main />
                 </Auth>
               </>
             }

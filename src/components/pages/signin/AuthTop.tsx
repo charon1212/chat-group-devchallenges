@@ -3,6 +3,7 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'fire
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../../app/firebase/firebase';
 import { useTextField } from '../../hooks/useTextField';
+import TestUser from './TestUser';
 
 const AuthTop = () => {
   const [email, setEmail, propEmail] = useTextField();
@@ -55,6 +56,7 @@ const AuthTop = () => {
             </div>
           </div>
           <Typography>(created by charon1212)</Typography>
+          <TestUser setMail={setEmail} setPassword={setPassword} />
         </Paper>
       </div>
     </>

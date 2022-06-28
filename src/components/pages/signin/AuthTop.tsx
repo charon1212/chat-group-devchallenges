@@ -1,5 +1,5 @@
 import { Button, Paper, TextField, Typography, useTheme } from '@mui/material';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../../app/firebase/firebase';
 import { useTextField } from '../../hooks/useTextField';
@@ -10,6 +10,21 @@ const AuthTop = () => {
   const theme = useTheme();
   const navigate = useNavigate();
 
+  const onSignin = async () => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        if (userCredential.user) {
+          navigate('/');
+        } else {
+          alert('サインインに失敗しました。');
+        }
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert(JSON.stringify({ errorCode, errorMessage }));
+      });
+  };
   const onSignup = async () => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
@@ -35,7 +50,7 @@ const AuthTop = () => {
             <TextField {...propEmail} label='e-mail' />
             <TextField {...propPassword} label='password' type='password' />
             <div style={{ textAlign: 'right' }}>
-              <Button>Signin</Button>
+              <Button onClick={onSignin}>Signin</Button>
               <Button onClick={onSignup}>Signup</Button>
             </div>
           </div>

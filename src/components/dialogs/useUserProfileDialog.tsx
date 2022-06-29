@@ -1,5 +1,7 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, Typography, useTheme } from '@mui/material';
 import { useState } from 'react';
+import { useAppSelector } from '../../app/hooks';
+import { selectUser } from '../../features/user/userSlice';
 import { useTextField } from '../hooks/useTextField';
 import AvatarEdit from './AvatarEdit';
 
@@ -9,7 +11,11 @@ export const useUserProfileDialog = () => {
   const [avatarImage, setAvatarImage] = useState<File | undefined>(undefined);
   const theme = useTheme();
 
+  const user = useAppSelector(selectUser);
+
   const openUserProfileDialog = () => {
+    setDisplayName(user.displayName);
+    setAvatarImage(undefined);
     setOpen(true);
   };
   const UserProfileDialog = (
@@ -31,7 +37,7 @@ export const useUserProfileDialog = () => {
                 <Typography>Avatar Image</Typography>
               </td>
               <td style={{ padding: theme.spacing(1) }}>
-                <div style={{ display: 'flex', justifyContent:'center' }}>
+                <div style={{ display: 'flex', justifyContent: 'center' }}>
                   <AvatarEdit initialImageUrl='' setter={setAvatarImage} />
                 </div>
               </td>

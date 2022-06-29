@@ -1,7 +1,6 @@
 import { Button, Paper, TextField, Typography, useTheme } from '@mui/material';
-import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import { auth } from '../../../app/firebase/firebase';
+import { signin } from '../../../domain/firebase/signin';
 import { useSignUpConfirm } from '../../dialogs/useSignUpConfirm';
 import { useTextField } from '../../hooks/useTextField';
 import TestUser from './TestUser';
@@ -12,20 +11,10 @@ const AuthTop = () => {
   const theme = useTheme();
   const navigate = useNavigate();
 
-  const onSignin = async () => {
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        if (userCredential.user) {
-          navigate('/');
-        } else {
-          alert('サインインに失敗しました。');
-        }
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        alert(JSON.stringify({ errorCode, errorMessage }));
-      });
+  const onSignin = () => {
+    signin({ email, password }, () => {
+      navigate('/');
+    });
   };
   const { openSignUpConfirmDialog, SignUpConfirmDialog } = useSignUpConfirm();
 

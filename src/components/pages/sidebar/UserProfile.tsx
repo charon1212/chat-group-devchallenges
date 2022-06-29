@@ -5,9 +5,8 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ForumIcon from '@mui/icons-material/Forum';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { useState } from 'react';
-import { signOut } from 'firebase/auth';
-import { auth } from '../../../app/firebase/firebase';
 import { useUserProfileDialog } from '../../dialogs/useUserProfileDialog';
+import { signout } from '../../../domain/firebase/signout';
 
 const UserProfile = () => {
   const theme = useTheme();
@@ -19,16 +18,6 @@ const UserProfile = () => {
   };
 
   const { openUserProfileDialog, UserProfileDialog } = useUserProfileDialog();
-
-  const signout = () => {
-    signOut(auth)
-      .then(() => {})
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        alert(JSON.stringify({ errorCode, errorMessage }));
-      });
-  };
 
   return (
     <>
@@ -73,7 +62,9 @@ const UserProfile = () => {
             Tweeter
           </MenuItem>
           <Divider variant='inset' component='li' />
-          <MenuItem onClick={signout}>
+          <MenuItem onClick={() => {
+            signout();
+          }}>
             <ListItemIcon>
               <ExitToAppIcon />
             </ListItemIcon>

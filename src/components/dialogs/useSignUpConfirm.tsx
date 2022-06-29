@@ -1,8 +1,7 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { auth } from '../../app/firebase/firebase';
+import { signup } from '../../domain/firebase/signup';
 
 export const useSignUpConfirm = () => {
   const [open, setOpen] = useState(false);
@@ -17,19 +16,12 @@ export const useSignUpConfirm = () => {
   };
 
   const onSignup = () => {
-    return createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        if (userCredential.user) {
-          navigate('/');
-        } else {
-          alert('サインアップに失敗しました。');
-        }
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        alert(JSON.stringify({ errorCode, errorMessage }));
-      });
+    signup({ email, password }, () => {
+      navigate('/');
+      setOpen(false);
+      setEmail('');
+      setPassword('');
+    });
   };
 
   const SignUpConfirmDialog = (
@@ -42,15 +34,7 @@ export const useSignUpConfirm = () => {
           Are you sure you want to sign up?
         </DialogContent>
         <DialogActions>
-          <Button
-            onClick={() => {
-              onSignup().then(() => {
-                setOpen(false);
-              });
-            }}
-          >
-            OK
-          </Button>
+          <Button onClick={onSignup}>OK</Button>
           <Button
             onClick={() => {
               setOpen(false);

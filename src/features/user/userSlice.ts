@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { User as FirebaseUser } from 'firebase/auth';
 import { RootState } from '../../app/store';
 import { User } from '../../domain/type/User';
 
@@ -15,13 +14,9 @@ export const userSlice = createSlice({
     user: initialState
   },
   reducers: {
-    login: (state, action: PayloadAction<FirebaseUser>) => {
+    login: (state, action: PayloadAction<User>) => {
       const user = action.payload;
-      state.user = {
-        uid: user.uid,
-        displayName: user.displayName || '',
-        photoUrl: user.photoURL || '',
-      }
+      state.user = { ...user };
     },
     logout: (state) => {
       state.user = initialState;

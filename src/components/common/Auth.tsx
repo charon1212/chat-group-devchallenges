@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import { login, logout } from '../..//features/user/userSlice';
 import { auth } from '../../app/firebase/firebase';
+import { myFirestoreKitUser } from '../../domain/firestore/FirestoreUser';
 
 type Prop = {
   loginUri: string;
@@ -34,11 +35,20 @@ const Auth: React.FC<Prop> = (props) => {
   const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
-    const unSub = auth.onAuthStateChanged(async (authUser) => {
+    const unSub = auth.onAuthStateChanged((authUser) => {
       if (authUser) {
         // ログインしている
-        dispatch(login(authUser));
-        setIsLogin(true);
+        myFirestoreKitUser.get({}, authUser.uid).then((user) => {
+          console.log(`log1: ${JSON.stringify({ user })}`);
+          if (user) {
+            dispatch(login(user));
+            setIsLogin(true);
+            setHasChecked(true);
+          } else {
+            setOnSignOut(true);
+            setHasChecked(true);
+          }
+        });
       } else {
         // ログインしていない
         /**
@@ -47,8 +57,8 @@ const Auth: React.FC<Prop> = (props) => {
          * これを避けるため、一度onSignOutを切り替えることでローディングコンポーネントの描画に切り替え、そのあとでdispatch(logout())を実行する。
          */
         setOnSignOut(true);
+        setHasChecked(true);
       }
-      setHasChecked(true);
     });
     return () => unSub();
   }, [dispatch]);

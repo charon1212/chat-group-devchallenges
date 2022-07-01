@@ -18,13 +18,17 @@ export const userSlice = createSlice({
       const user = action.payload;
       state.user = { ...user };
     },
+    updateProfile: (state, action: PayloadAction<User>) => {
+      const user = action.payload;
+      state.user = { ...user };
+    },
     logout: (state) => {
       state.user = initialState;
     }
   },
 });
 
-export const { login, logout } = userSlice.actions;
+export const { login, logout, updateProfile } = userSlice.actions;
 
 export const selectUser = (state: RootState) => state.user.user;
 

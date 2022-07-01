@@ -85,6 +85,9 @@ $ npm start
 - [Node.js](https://nodejs.org/)
 - [Marked - a markdown parser](https://github.com/chjj/marked)
 
+<!-- テストユーザーのアバターアイコンに利用 -->
+- <a href='https://www.freepik.com/free-vector/illustration-vector-various-careers-professions_2582202.htm#query=avatar&position=10&from_view=search'>Profession icon vector created by rawpixel.com - www.freepik.com</a>
+
 ## Contact
 
 - Website [your-website.com](https://{your-web-site-link})

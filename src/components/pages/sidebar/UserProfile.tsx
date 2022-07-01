@@ -7,9 +7,12 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { useState } from 'react';
 import { useUserProfileDialog } from '../../dialogs/useUserProfileDialog';
 import { signout } from '../../../domain/firebase/signout';
+import { useAppSelector } from '../../../app/hooks';
+import { selectUser } from '../../../features/user/userSlice';
 
 const UserProfile = () => {
   const theme = useTheme();
+  const user = useAppSelector(selectUser);
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const linkClickHandler = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
@@ -27,11 +30,12 @@ const UserProfile = () => {
             style={{
               display: 'flex',
               alignItems: 'center',
+              justifyContent: 'space-between',
               marginTop: '10px',
             }}
           >
-            <Avatar alt='test' src='https://image.flaticon.com/icons/png/512/147/147144.png' />
-            <Typography style={{ marginLeft: '20px' }}>ログインユーザーの表示名</Typography>
+            <Avatar alt='avatar image' src={user.photoUrl} />
+            <Typography style={{ marginLeft: '20px' }}>{user.displayName}</Typography>
             {anchorEl ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
           </div>
         </Link>
@@ -62,9 +66,11 @@ const UserProfile = () => {
             Tweeter
           </MenuItem>
           <Divider variant='inset' component='li' />
-          <MenuItem onClick={() => {
-            signout();
-          }}>
+          <MenuItem
+            onClick={() => {
+              signout();
+            }}
+          >
             <ListItemIcon>
               <ExitToAppIcon />
             </ListItemIcon>

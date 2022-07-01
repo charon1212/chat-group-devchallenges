@@ -1,23 +1,49 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, Typography, useTheme } from '@mui/material';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { useState } from 'react';
-import { useAppSelector } from '../../app/hooks';
-import { selectUser } from '../../features/user/userSlice';
+import { storage } from '../../app/firebase/firebase';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { myFirestoreKitUser } from '../../domain/firestore/FirestoreUser';
+import { User } from '../../domain/type/User';
+import { selectUser, updateProfile } from '../../features/user/userSlice';
 import { useTextField } from '../hooks/useTextField';
 import AvatarEdit from './AvatarEdit';
+import { useYesNoDialog } from './useYesNoDialog';
 
 export const useUserProfileDialog = () => {
   const [open, setOpen] = useState(false);
   const [displayName, setDisplayName, propDisplayName] = useTextField('');
   const [avatarImage, setAvatarImage] = useState<File | undefined>(undefined);
   const theme = useTheme();
-
+  const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
+
+  const { openYesNoDialog, yesNoDialog } = useYesNoDialog({
+    title: 'Confirm update user profile.',
+    message: 'Are you sure you want to edit user profile?',
+    onClickYes: async (closeDialog) => {
+      const uploadAvatarImageUrl = await uploadFileFirestoreStorage(avatarImage, `AvatarImage-${user.uid}`);
+      const newUser: User = {
+        uid: user.uid,
+        displayName: displayName || user.displayName,
+        photoUrl: uploadAvatarImageUrl || user.photoUrl,
+      };
+      await myFirestoreKitUser.set({}, user.uid, newUser);
+      dispatch(updateProfile(newUser));
+      closeDialog();
+      setOpen(false);
+    },
+    onClickNo: (closeDialog) => {
+      closeDialog();
+    },
+  });
 
   const openUserProfileDialog = () => {
     setDisplayName(user.displayName);
     setAvatarImage(undefined);
     setOpen(true);
   };
+
   const UserProfileDialog = (
     <>
       <Dialog open={open}>
@@ -45,7 +71,13 @@ export const useUserProfileDialog = () => {
           </table>
         </DialogContent>
         <DialogActions>
-          <Button>OK</Button>
+          <Button
+            onClick={() => {
+              openYesNoDialog();
+            }}
+          >
+            OK
+          </Button>
           <Button
             onClick={() => {
               setOpen(false);
@@ -55,8 +87,16 @@ export const useUserProfileDialog = () => {
           </Button>
         </DialogActions>
       </Dialog>
+      {yesNoDialog}
     </>
   );
 
   return { openUserProfileDialog, UserProfileDialog };
+};
+
+const uploadFileFirestoreStorage = async (file: File | undefined, fileName: string) => {
+  if (!file) return undefined;
+  const snapshot = await uploadBytes(ref(storage, fileName), file);
+  const downloadUrl = await getDownloadURL(snapshot.ref);
+  return downloadUrl;
 };

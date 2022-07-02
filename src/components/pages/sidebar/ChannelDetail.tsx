@@ -6,13 +6,19 @@ import MemberList from './MemberList';
 const ChannelDetail = () => {
   const theme = useTheme();
   const channel = useAppSelector(selectChannel);
+  const linesDescription = channel.description.split('\n');
 
   return (
     <>
       <div style={{ margin: theme.spacing(1) }}>
         <div style={{ margin: theme.spacing(2) }}>
           <h3>{channel.title}</h3>
-          {channel.description}
+          {linesDescription.map((v) => (
+            <>
+              {v}
+              <br />
+            </>
+          ))}
         </div>
         <MemberList />
       </div>

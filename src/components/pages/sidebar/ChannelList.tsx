@@ -2,6 +2,7 @@ import { Add } from '@mui/icons-material';
 import { IconButton, List, ListItem, ListItemButton, ListItemText, Typography, FormControl, useTheme } from '@mui/material';
 import { useAppDispatch } from '../../../app/hooks';
 import { changeChannel } from '../../../features/channel/channelSlice';
+import { useCreateChannelDialog } from '../../dialogs/useCreateChannelDialog';
 import { useSearchField } from '../../hooks/useSearchField';
 
 const ChannelList = () => {
@@ -10,6 +11,7 @@ const ChannelList = () => {
   const sampleChannelArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 
   const { searchWord, searchFieldElement } = useSearchField();
+  const { openCreateChannelDialog, createChannelDialog } = useCreateChannelDialog();
   const dispatch = useAppDispatch();
   const onClickChannel = (i: string) => {
     dispatch(
@@ -30,7 +32,11 @@ const ChannelList = () => {
             <Typography variant='h5'>Channels</Typography>
           </div>
           <div>
-            <IconButton>
+            <IconButton
+              onClick={() => {
+                openCreateChannelDialog();
+              }}
+            >
               <Add color='primary' fontSize='large' />
             </IconButton>
           </div>
@@ -56,6 +62,7 @@ const ChannelList = () => {
           </List>
         </div>
       </div>
+      {createChannelDialog}
     </>
   );
 };

@@ -3,6 +3,8 @@ import { IconButton, List, ListItem, ListItemButton, ListItemText, Typography, F
 import { useEffect, useState } from 'react';
 import { useAppDispatch } from '../../../app/hooks';
 import { myFirestoreKitChannel } from '../../../domain/firestore/FirestoreChannel';
+import { myFirestoreKitChannelAuthority } from '../../../domain/firestore/FirestoreChannelAuthority';
+import { myFirestoreKitUser } from '../../../domain/firestore/FirestoreUser';
 import { Channel } from '../../../domain/type/Channel';
 import { changeChannel } from '../../../features/channel/channelSlice';
 import { useCreateChannelDialog } from '../../dialogs/useCreateChannelDialog';
@@ -24,6 +26,18 @@ const ChannelList = () => {
       unsubscription();
     };
   }, []);
+
+  const selectChannel = async (channel: Channel) => {
+    const channelAuthorityList = await myFirestoreKitChannelAuthority.find({ channel });
+    await Promise.all(
+      channelAuthorityList.map((member) => {
+        return myFirestoreKitUser.get({}, member.user.uid).then((data) => {
+          if (data) member.user = data;
+        });
+      })
+    );
+    dispatch(changeChannel({ channel, members: channelAuthorityList.map(({ user, type }) => ({ user, authType: type })) }));
+  };
 
   return (
     <>
@@ -52,7 +66,7 @@ const ChannelList = () => {
                 <ListItem>
                   <ListItemButton
                     onClick={() => {
-                      dispatch(changeChannel(channel));
+                      selectChannel(channel);
                     }}
                   >
                     <ListItemText primary={channel.title} />

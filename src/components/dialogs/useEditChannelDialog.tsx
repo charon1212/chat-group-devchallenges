@@ -44,7 +44,9 @@ export const useEditChannelDialog = () => {
           </div>
         </DialogContent>
         <DialogActions>
-          <Button onClick={onEdit}>Save</Button>
+          <Button variant='contained' onClick={onEdit}>
+            Save
+          </Button>
         </DialogActions>
       </Dialog>
     </>

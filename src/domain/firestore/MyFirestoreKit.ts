@@ -1,4 +1,4 @@
-import { addDoc, collection, doc, getDoc, getDocs, onSnapshot, query, setDoc } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, getDocs, onSnapshot, query, QueryConstraint, setDoc } from "firebase/firestore";
 import { db } from "../../app/firebase/firebase";
 
 export type FirestoreKitParam<Domain, Collection extends Object, PathParam> = {
@@ -11,10 +11,10 @@ export class MyFirestoreKit<Domain, Collection extends Object, PathParam> {
 
   constructor(public param: FirestoreKitParam<Domain, Collection, PathParam>) { }
 
-  async find(pathParam: PathParam): Promise<Domain[]> {
+  async find(pathParam: PathParam, queries?: QueryConstraint[]): Promise<Domain[]> {
     const collectionPath = this.param.collectionPath(pathParam);
     const collectionRef = collection(db, collectionPath);
-    const q = query(collectionRef);
+    const q = query(collectionRef, ...(queries || []));
     const snapshots = await getDocs(q);
     const docList: Domain[] = [];
     snapshots.forEach((snapshot) => {

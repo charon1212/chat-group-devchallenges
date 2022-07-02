@@ -8,7 +8,7 @@ const ChannelTitle = () => {
   const channel = useAppSelector(selectChannel);
   const theme = useTheme();
 
-  const { openCreateChannelDialog, createChannelDialog } = useEditChannelDialog();
+  const { openEditChannelDialog, editChannelDialog } = useEditChannelDialog();
 
   return (
     <>
@@ -16,13 +16,13 @@ const ChannelTitle = () => {
         <div style={{ margin: theme.spacing(0, 5, 0), display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
           <h3>{channel.title}</h3>
           <div>
-            <IconButton onClick={openCreateChannelDialog}>
+            <IconButton onClick={openEditChannelDialog}>
               <EditIcon />
             </IconButton>
           </div>
         </div>
       </div>
-      {createChannelDialog}
+      {editChannelDialog}
     </>
   );
 };

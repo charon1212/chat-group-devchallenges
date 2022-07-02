@@ -51,5 +51,5 @@ export const useEditChannelDialog = () => {
       </Dialog>
     </>
   );
-  return { openCreateChannelDialog: openEditChannelDialog, createChannelDialog: editChannelDialog };
+  return { openEditChannelDialog, editChannelDialog };
 };

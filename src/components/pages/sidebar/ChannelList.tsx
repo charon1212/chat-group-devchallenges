@@ -1,6 +1,9 @@
 import { Add } from '@mui/icons-material';
 import { IconButton, List, ListItem, ListItemButton, ListItemText, Typography, FormControl, useTheme } from '@mui/material';
+import { useEffect, useState } from 'react';
 import { useAppDispatch } from '../../../app/hooks';
+import { myFirestoreKitChannel } from '../../../domain/firestore/FirestoreChannel';
+import { Channel } from '../../../domain/type/Channel';
 import { changeChannel } from '../../../features/channel/channelSlice';
 import { useCreateChannelDialog } from '../../dialogs/useCreateChannelDialog';
 import { useSearchField } from '../../hooks/useSearchField';
@@ -8,21 +11,19 @@ import { useSearchField } from '../../hooks/useSearchField';
 const ChannelList = () => {
   const theme = useTheme();
 
-  const sampleChannelArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
-
   const { searchWord, searchFieldElement } = useSearchField();
+  const [channelList, setChannelList] = useState<Channel[]>([]);
   const { openCreateChannelDialog, createChannelDialog } = useCreateChannelDialog();
   const dispatch = useAppDispatch();
-  const onClickChannel = (i: string) => {
-    dispatch(
-      changeChannel({
-        uid: `uid-${i}`,
-        title: `title${i}`,
-        description: `description${i}`,
-        isDefault: false,
-      })
-    );
-  };
+
+  useEffect(() => {
+    const unsubscription = myFirestoreKitChannel.listenCollection({}, (list) => {
+      setChannelList(list);
+    });
+    return () => {
+      unsubscription();
+    };
+  }, []);
 
   return (
     <>
@@ -46,15 +47,15 @@ const ChannelList = () => {
         </div>
         <div style={{ overflowY: 'scroll' }}>
           <List>
-            {sampleChannelArray.map((i) => (
+            {channelList.map((channel) => (
               <>
                 <ListItem>
                   <ListItemButton
                     onClick={() => {
-                      onClickChannel(`${i}`);
+                      dispatch(changeChannel(channel));
                     }}
                   >
-                    <ListItemText primary={`チャンネル${i}`} />
+                    <ListItemText primary={channel.title} />
                   </ListItemButton>
                 </ListItem>
               </>

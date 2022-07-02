@@ -1,4 +1,4 @@
-import { addDoc, collection, doc, getDoc, getDocs, query, setDoc } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, getDocs, onSnapshot, query, setDoc } from "firebase/firestore";
 import { db } from "../../app/firebase/firebase";
 
 export type FirestoreKitParam<Domain, Collection extends Object, PathParam> = {
@@ -22,6 +22,19 @@ export class MyFirestoreKit<Domain, Collection extends Object, PathParam> {
       docList.push(this.param.decode(snapshot.id, data, pathParam));
     });
     return docList;
+  }
+
+  listenCollection(pathParam: PathParam, observer: (list: Domain[]) => unknown,) {
+    const collectionPath = this.param.collectionPath(pathParam);
+    const q = query(collection(db, collectionPath));
+    return onSnapshot(q, (querySnapshot) => {
+      const dataList: Domain[] = [];
+      querySnapshot.forEach((doc) => {
+        const data = doc.data() as Collection;
+        dataList.push(this.param.decode(doc.id, data, pathParam));
+      });
+      observer(dataList);
+    });
   }
 
   async get(pathParam: PathParam, uid: string): Promise<Domain | undefined> {

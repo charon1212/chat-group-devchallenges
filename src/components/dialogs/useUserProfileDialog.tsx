@@ -46,7 +46,12 @@ export const useUserProfileDialog = () => {
 
   const UserProfileDialog = (
     <>
-      <Dialog open={open}>
+      <Dialog
+        open={open}
+        onClose={() => {
+          setOpen(false);
+        }}
+      >
         <DialogTitle>Edit User Profile</DialogTitle>
         <DialogContent>
           <table>

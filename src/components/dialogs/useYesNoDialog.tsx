@@ -20,7 +20,12 @@ export const useYesNoDialog = (param: YesNoDialogParam) => {
 
   const yesNoDialog = (
     <>
-      <Dialog open={open}>
+      <Dialog
+        open={open}
+        onClose={() => {
+          if (onClickNo) onClickNo(closeYesNoDialog);
+        }}
+      >
         {title ? <DialogTitle>{title}</DialogTitle> : ''}
         <DialogContent>{message}</DialogContent>
         <DialogActions>

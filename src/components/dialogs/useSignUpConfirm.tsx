@@ -23,10 +23,15 @@ export const useSignUpConfirm = () => {
       setPassword('');
     });
   };
+  const closeDialog = () => {
+    setOpen(false);
+    setEmail('');
+    setPassword('');
+  };
 
   const SignUpConfirmDialog = (
     <>
-      <Dialog open={open}>
+      <Dialog open={open} onClose={closeDialog}>
         <DialogTitle>Confirm Sign up</DialogTitle>
         <DialogContent>
           Please confirm "{email}" is your email.
@@ -35,15 +40,7 @@ export const useSignUpConfirm = () => {
         </DialogContent>
         <DialogActions>
           <Button onClick={onSignup}>OK</Button>
-          <Button
-            onClick={() => {
-              setOpen(false);
-              setEmail('');
-              setPassword('');
-            }}
-          >
-            Cancel
-          </Button>
+          <Button onClick={closeDialog}>Cancel</Button>
         </DialogActions>
       </Dialog>
     </>

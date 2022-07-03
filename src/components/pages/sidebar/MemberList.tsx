@@ -11,8 +11,8 @@ const MemberList = () => {
     <>
       <div style={{ margin: theme.spacing(2) }}>
         <h3>MEMBERS</h3>
-        {channel.members.map(({ user, authType }) => (
-          <ListItemUser user={user} authType={authType} />
+        {channel.channelAuthList.map(({ user, type }) => (
+          <ListItemUser user={user} authType={type} />
         ))}
       </div>
     </>

@@ -36,7 +36,7 @@ const ChannelList = () => {
         });
       })
     );
-    dispatch(changeChannel({ channel, members: channelAuthorityList.map(({ user, type }) => ({ user, authType: type })) }));
+    dispatch(changeChannel({ channel, channelAuthList: channelAuthorityList }));
   };
 
   return (

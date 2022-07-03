@@ -1,17 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
 import { Channel } from "../../domain/type/Channel";
-import { ChannelAuthType } from "../../domain/type/ChannelAuthority";
-import { User } from "../../domain/type/User";
+import { ChannelAuthority } from "../../domain/type/ChannelAuthority";
 
-type ChannelMember = { user: User, authType: ChannelAuthType };
-
-const initialState: Channel & { members: ChannelMember[] } = {
+const initialState: Channel & { channelAuthList: ChannelAuthority[] } = {
   uid: '',
   description: '',
   isDefault: false,
   title: '',
-  members: [],
+  channelAuthList: [],
 };
 
 export const channelSlice = createSlice({
@@ -20,19 +17,24 @@ export const channelSlice = createSlice({
     channel: initialState
   },
   reducers: {
-    changeChannel: (state, action: PayloadAction<{ channel: Channel, members: ChannelMember[] }>) => {
-      const { channel, members } = action.payload;
-      state.channel = { ...channel, members };
+    changeChannel: (state, action: PayloadAction<{ channel: Channel, channelAuthList: ChannelAuthority[] }>) => {
+      const { channel, channelAuthList } = action.payload;
+      state.channel = { ...channel, channelAuthList };
     },
     updateChannel: (state, action: PayloadAction<Channel>) => {
       const preChannel = state.channel;
       const channel = action.payload;
       state.channel = { ...preChannel, ...channel };
     },
+    updateChannelAuthority: (state, action: PayloadAction<ChannelAuthority[]>) => {
+      const preChannel = state.channel;
+      const channelAuthList = action.payload;
+      state.channel = { ...preChannel, channelAuthList };
+    },
   },
 });
 
-export const { changeChannel, updateChannel } = channelSlice.actions;
+export const { changeChannel, updateChannel, updateChannelAuthority } = channelSlice.actions;
 
 export const selectChannel = (state: RootState) => state.channel.channel;
 

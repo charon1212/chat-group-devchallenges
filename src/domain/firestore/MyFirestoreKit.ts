@@ -1,4 +1,4 @@
-import { addDoc, collection, doc, getDoc, getDocs, onSnapshot, query, QueryConstraint, setDoc } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, query, QueryConstraint, setDoc } from "firebase/firestore";
 import { db } from "../../app/firebase/firebase";
 
 export type FirestoreKitParam<Domain, Collection extends Object, PathParam> = {
@@ -53,6 +53,11 @@ export class MyFirestoreKit<Domain, Collection extends Object, PathParam> {
   async add(pathParam: PathParam, data: Domain) {
     const collectionPath = this.param.collectionPath(pathParam);
     return await addDoc(collection(db, collectionPath), this.param.encode(data));
+  }
+
+  async delete(pathParam: PathParam, uid: string) {
+    const collectionPath = this.param.collectionPath(pathParam);
+    return await deleteDoc(doc(db, collectionPath, uid));
   }
 
 }

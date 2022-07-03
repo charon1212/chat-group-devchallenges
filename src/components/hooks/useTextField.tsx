@@ -1,16 +1,12 @@
-import { TextFieldProps } from '@mui/material';
 import { useState } from 'react';
 
-export const useTextField = (initialValue?: string): [string, React.Dispatch<React.SetStateAction<string>>, TextFieldProps] => {
+export const useTextField = (initialValue?: string) => {
   const [value, setter] = useState(initialValue ?? '');
-  return [
+  const props = {
     value,
-    setter,
-    {
-      value,
-      onChange: (e) => {
-        setter(e.target.value);
-      },
+    onChange: (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+      setter(e.target.value);
     },
-  ];
+  };
+  return [value, setter, props] as [typeof value, typeof setter, typeof props];
 };

@@ -1,20 +1,36 @@
 import { Avatar, Divider, List, ListItem, ListItemAvatar, ListItemText, useTheme } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { useAppSelector } from '../../../app/hooks';
+import { myFirestoreKitChat } from '../../../domain/firestore/FirestoreChat';
+import { myFirestoreKitUser } from '../../../domain/firestore/FirestoreUser';
+import { Chat } from '../../../domain/type/Chat';
+import { selectChannel } from '../../../features/channel/channelSlice';
 import { useScrollAt } from '../../hooks/useScrollAt';
 
-type Props = {};
-const ChatFrame = (props: Props) => {
+const ChatFrame = () => {
   const theme = useTheme();
-  const {} = props;
   const { ref } = useScrollAt();
+  const channel = useAppSelector(selectChannel);
+  const [chatList, setChatList] = useState<Chat[]>([]);
+  useEffect(() => {
+    myFirestoreKitChat.listenCollection({ channel }, async (list) => {
+      await Promise.all(
+        list.map(async (v) => {
+          v.user = (await myFirestoreKitUser.get({}, v.user.uid))!;
+        })
+      );
+      setChatList(list.sort((a, b) => a.dateMilliseconds - b.dateMilliseconds));
+    });
+  }, [channel]);
 
   return (
     <>
       <div style={{ height: 'auto', overflowY: 'hidden' }}>
         <div style={{ margin: theme.spacing(1, 3, 1, 1), overflowY: 'scroll', maxHeight: '100%' }}>
           <List>
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map((index) => {
-              return <ChatBox index={`${index}`} />;
-            })}
+            {chatList.map((chat) => (
+              <ChatBox chat={chat} />
+            ))}
             <DateDivider />
             <div ref={ref} />
           </List>
@@ -24,16 +40,16 @@ const ChatFrame = (props: Props) => {
   );
 };
 
-type PropsChatBox = { index: string };
+type PropsChatBox = { chat: Chat };
 const ChatBox = (props: PropsChatBox) => {
-  const { index } = props;
+  const { chat } = props;
   return (
     <>
       <ListItem alignItems='flex-start'>
         <ListItemAvatar>
-          <Avatar alt='test' src='https://image.flaticon.com/icons/png/512/147/147144.png' />
+          <Avatar alt='avatar-image' src={chat.user.photoUrl} />
         </ListItemAvatar>
-        <ListItemText primary='Title' secondary={'sample hogehoge' + index} />
+        <ListItemText primary={chat.user.displayName} secondary={chat.chatContent} />
       </ListItem>
     </>
   );

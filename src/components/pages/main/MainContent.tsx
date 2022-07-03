@@ -9,7 +9,7 @@ const MainContent = () => {
 
   return (
     <>
-      <div style={{ display: 'flex', flexDirection: 'column', width: '100%', backgroundColor: '#282828' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', width: '100%', backgroundColor: '#282828'}}>
         {channel.uid ? (
           <>
             <ChannelTitle />

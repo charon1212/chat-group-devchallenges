@@ -7,7 +7,7 @@ import { createRef, useEffect } from 'react';
  * @param onChange スクロールを実施するuseEffectに渡す依存変数。この配列内の値が変化した時にスクロールを行う。省略、または空配列を指定すると、初期表示のみスクロールする。
  * @returns スクロール対象の要素に設定するReference。
  */
-export const useScrollAt = (onChange?: unknown[]) => {
+export const useScrollAt = (...onChange: unknown[]) => {
   const ref = createRef<HTMLDivElement>();
   useEffect(() => {
     ref.current?.scrollIntoView({

@@ -9,7 +9,6 @@ import { useScrollAt } from '../../hooks/useScrollAt';
 
 const ChatFrame = () => {
   const theme = useTheme();
-  const { ref } = useScrollAt();
   const channel = useAppSelector(selectChannel);
   const [chatList, setChatList] = useState<(Chat & { dateObj: DateObj })[]>([]);
   useEffect(() => {
@@ -22,11 +21,12 @@ const ChatFrame = () => {
       setChatList(list.sort((a, b) => a.dateMilliseconds - b.dateMilliseconds).map((v) => ({ ...v, dateObj: getDateObj(v.dateMilliseconds) })));
     });
   }, [channel]);
+  const { ref } = useScrollAt(chatList);
 
   return (
     <>
-      <div style={{ height: 'auto', overflowY: 'hidden' }}>
-        <div style={{ margin: theme.spacing(1, 3, 1, 1), overflowY: 'scroll', maxHeight: '100%' }}>
+      <div style={{ height: 'auto', overflowY: 'hidden', flexGrow: 2 }}>
+        <div style={{ margin: theme.spacing(1, 3, 1, 1), overflowY: 'scroll', height: '100%' }}>
           <List>
             {chatList.map((chat, i) => {
               const postChat = chatList[i + 1];

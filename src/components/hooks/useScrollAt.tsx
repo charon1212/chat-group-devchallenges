@@ -13,6 +13,6 @@ export const useScrollAt = (...onChange: unknown[]) => {
     ref.current?.scrollIntoView({
       block: 'end',
     });
-  }, [...(onChange || [])]);
+  }, [...onChange]);
   return { ref };
 };

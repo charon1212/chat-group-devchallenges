@@ -1,11 +1,13 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, useTheme } from '@mui/material';
 import { useState } from 'react';
-import { useAppSelector } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { myFirestoreKitChannel } from '../../domain/firestore/FirestoreChannel';
 import { myFirestoreKitChannelAuthority } from '../../domain/firestore/FirestoreChannelAuthority';
+import { myFirestoreKitUser } from '../../domain/firestore/FirestoreUser';
 import { Channel } from '../../domain/type/Channel';
 import { ChannelAuthority } from '../../domain/type/ChannelAuthority';
-import { selectUser } from '../../features/user/userSlice';
+import { User } from '../../domain/type/User';
+import { selectUser, updateProfile } from '../../features/user/userSlice';
 import { useTextField } from '../hooks/useTextField';
 
 export const useCreateChannelDialog = () => {
@@ -14,6 +16,7 @@ export const useCreateChannelDialog = () => {
   const [description, setDescription, propDescription] = useTextField('');
   const theme = useTheme();
   const user = useAppSelector(selectUser);
+  const dispatch = useAppDispatch();
 
   const openCreateChannelDialog = () => {
     setOpen(true);
@@ -26,6 +29,9 @@ export const useCreateChannelDialog = () => {
     const createChannel: Channel = { ...newChannel, uid: channelRef.id };
     const newChannelAuth: ChannelAuthority = { user, channel: createChannel, uid: '', type: 'admin' };
     await myFirestoreKitChannelAuthority.add({ channel: createChannel }, newChannelAuth);
+    const newUser: User = { ...user, accessibleChannel: [...user.accessibleChannel, createChannel.uid] };
+    await myFirestoreKitUser.set({}, user.uid, newUser);
+    dispatch(updateProfile(newUser));
     setOpen(false);
   };
 

@@ -27,6 +27,7 @@ export const useUserProfileDialog = () => {
         uid: user.uid,
         displayName: displayName || user.displayName,
         photoUrl: uploadAvatarImageUrl || user.photoUrl,
+        accessibleChannel: user.accessibleChannel,
       };
       await myFirestoreKitUser.set({}, user.uid, newUser);
       dispatch(updateProfile(newUser));

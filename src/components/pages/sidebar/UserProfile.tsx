@@ -7,12 +7,14 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { useState } from 'react';
 import { useUserProfileDialog } from '../../dialogs/useUserProfileDialog';
 import { signout } from '../../../domain/firebase/signout';
-import { useAppSelector } from '../../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { selectUser } from '../../../features/user/userSlice';
+import { resetChannel } from '../../../features/channel/channelSlice';
 
 const UserProfile = () => {
   const theme = useTheme();
   const user = useAppSelector(selectUser);
+  const dispatch = useAppDispatch();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const linkClickHandler = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
@@ -68,7 +70,9 @@ const UserProfile = () => {
           <Divider variant='inset' component='li' />
           <MenuItem
             onClick={() => {
-              signout();
+              signout(() => {
+                dispatch(resetChannel());
+              });
             }}
           >
             <ListItemIcon>

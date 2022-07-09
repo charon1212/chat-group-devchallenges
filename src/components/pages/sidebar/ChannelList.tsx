@@ -1,12 +1,13 @@
 import { Add } from '@mui/icons-material';
 import { IconButton, List, ListItem, ListItemButton, ListItemText, Typography, FormControl, useTheme } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { useAppDispatch } from '../../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { myFirestoreKitChannel } from '../../../domain/firestore/FirestoreChannel';
 import { myFirestoreKitChannelAuthority } from '../../../domain/firestore/FirestoreChannelAuthority';
 import { myFirestoreKitUser } from '../../../domain/firestore/FirestoreUser';
 import { Channel } from '../../../domain/type/Channel';
 import { changeChannel } from '../../../features/channel/channelSlice';
+import { selectUser } from '../../../features/user/userSlice';
 import { useCreateChannelDialog } from '../../dialogs/useCreateChannelDialog';
 import { useSearchField } from '../../hooks/useSearchField';
 
@@ -16,11 +17,12 @@ const ChannelList = () => {
   const { searchWord, searchFieldElement } = useSearchField();
   const [channelList, setChannelList] = useState<Channel[]>([]);
   const { openCreateChannelDialog, createChannelDialog } = useCreateChannelDialog();
+  const user = useAppSelector(selectUser);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     const unsubscription = myFirestoreKitChannel.listenCollection({}, (list) => {
-      setChannelList(list);
+      setChannelList(list.filter((c) => user.accessibleChannel.includes(c.uid)));
     });
     return () => {
       unsubscription();

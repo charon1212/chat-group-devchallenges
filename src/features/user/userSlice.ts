@@ -6,6 +6,7 @@ const initialState: User = {
   uid: '',
   displayName: '',
   photoUrl: '',
+  accessibleChannel: [],
 };
 
 export const userSlice = createSlice({

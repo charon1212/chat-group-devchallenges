@@ -28,6 +28,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { myFirestoreKitChannelAuthority } from '../../domain/firestore/FirestoreChannelAuthority';
 import { useSelectUserDialog } from './useSelectUserDialog';
 import { myFirestoreKitUser } from '../../domain/firestore/FirestoreUser';
+import { selectUser, updateProfile } from '../../features/user/userSlice';
 
 export const useEditChannelDialog = () => {
   const [open, setOpen] = useState(false);
@@ -37,6 +38,7 @@ export const useEditChannelDialog = () => {
   const theme = useTheme();
   const dispatch = useAppDispatch();
   const channel = useAppSelector(selectChannel);
+  const user = useAppSelector(selectUser);
 
   const openEditChannelDialog = () => {
     setOpen(true);
@@ -48,21 +50,11 @@ export const useEditChannelDialog = () => {
     const newChannel: Channel = { ...channel, title, description };
     await myFirestoreKitChannel.set({}, channel.uid, newChannel);
     dispatch(updateChannel(newChannel));
-    await Promise.all([
-      ...authList.map((channelAuth) => {
-        if (channelAuth.uid) {
-          return myFirestoreKitChannelAuthority.set({ channel }, channelAuth.uid, channelAuth);
-        } else {
-          return myFirestoreKitChannelAuthority.add({ channel }, channelAuth).then((docRef) => {
-            channelAuth.uid = docRef.id;
-          });
-        }
-      }),
-      ...channel.channelAuthList
-        .filter(({ uid }) => authList.some((a) => a.uid === uid))
-        .map(({ uid }) => myFirestoreKitChannelAuthority.delete({ channel }, uid)),
-    ]);
+    await updateChannelAuthList(channel, channel.channelAuthList, authList);
     dispatch(updateChannelAuthority(authList));
+    if (!authList.some((a) => a.user.uid === user.uid)) {
+      dispatch(updateProfile({ ...user, accessibleChannel: user.accessibleChannel.filter((c) => c !== channel.uid) }));
+    }
     setOpen(false);
   };
   const onChangeAuthTypeHandler = (i: number) => {
@@ -191,4 +183,27 @@ const SelectAuthority = (props: { value: ChannelAuthType; onChange?: (value: Cha
       </FormControl>
     </>
   );
+};
+
+const updateChannelAuthList = async (channel: Channel, beforeAuthList: ChannelAuthority[], afterAuthList: ChannelAuthority[]) => {
+  const addChannelAuthList = afterAuthList.filter(({ uid }) => uid);
+  const modifyChannelAuthList = afterAuthList.filter(({ uid }) => !uid);
+  const deleteChannelAuthList = beforeAuthList.filter(({ uid }) => afterAuthList.some((a) => a.uid === uid));
+  await Promise.all([
+    ...addChannelAuthList.map((channelAuth) =>
+      myFirestoreKitChannelAuthority.add({ channel }, channelAuth).then((docRef) => {
+        channelAuth.uid = docRef.id;
+      })
+    ),
+    ...modifyChannelAuthList.map((channelAuth) => myFirestoreKitChannelAuthority.set({ channel }, channelAuth.uid, channelAuth)),
+    ...deleteChannelAuthList.map((channelAuth) => myFirestoreKitChannelAuthority.delete({ channel }, channelAuth.uid)),
+    ...addChannelAuthList.map(async (channelAuth) => {
+      const user = await myFirestoreKitUser.get({}, channelAuth.user.uid);
+      if (user) myFirestoreKitUser.set({}, user.uid, { ...user, accessibleChannel: [...user.accessibleChannel, channel.uid] });
+    }),
+    ...deleteChannelAuthList.map(async (channelAuth) => {
+      const user = await myFirestoreKitUser.get({}, channelAuth.user.uid);
+      if (user) myFirestoreKitUser.set({}, user.uid, { ...user, accessibleChannel: user.accessibleChannel.filter((uid) => uid !== channel.uid) });
+    }),
+  ]);
 };

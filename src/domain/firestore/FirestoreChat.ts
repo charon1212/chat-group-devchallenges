@@ -13,5 +13,5 @@ export type PathParamChat = {
 export const myFirestoreKitChat = new MyFirestoreKit<Chat, CollectionChat, PathParamChat>({
   collectionPath: (pathParam) => `channel/${pathParam.channel.uid}/chat`,
   encode: ({ chatContent, dateMilliseconds, user }) => ({ chatContent, dateMilliseconds, userUid: user.uid }),
-  decode: (uid, { chatContent, dateMilliseconds, userUid }, { channel }) => ({ uid, channel, chatContent, dateMilliseconds, user: { uid: userUid, displayName: '', photoUrl: '' } }),
+  decode: (uid, { chatContent, dateMilliseconds, userUid }, { channel }) => ({ uid, channel, chatContent, dateMilliseconds, user: { uid: userUid, displayName: '', photoUrl: '', accessibleChannel: [], } }),
 });

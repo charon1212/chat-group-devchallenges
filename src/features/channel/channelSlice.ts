@@ -31,10 +31,13 @@ export const channelSlice = createSlice({
       const channelAuthList = action.payload;
       state.channel = { ...preChannel, channelAuthList };
     },
+    resetChannel: (state) => {
+      state.channel = { ...initialState };
+    },
   },
 });
 
-export const { changeChannel, updateChannel, updateChannelAuthority } = channelSlice.actions;
+export const { changeChannel, updateChannel, updateChannelAuthority, resetChannel } = channelSlice.actions;
 
 export const selectChannel = (state: RootState) => state.channel.channel;
 

@@ -27,7 +27,7 @@ const ChannelList = () => {
     return () => {
       unsubscription();
     };
-  }, []);
+  }, [user.accessibleChannel]);
 
   const selectChannel = async (channel: Channel) => {
     const channelAuthorityList = await myFirestoreKitChannelAuthority.find({ channel });

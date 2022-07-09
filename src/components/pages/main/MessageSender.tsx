@@ -11,8 +11,14 @@ const MessageSender = () => {
   const [message, setMessage, propMessage] = useTextField();
   const channel = useAppSelector(selectChannel);
   const user = useAppSelector(selectUser);
+  const currentUserChannelAuth = channel.channelAuthList.find((auth) => auth.user.uid === user.uid)?.type;
+  const haveAuthoritySendMessage = currentUserChannelAuth === 'admin' || currentUserChannelAuth === 'readwrite';
 
   const sendMessage = async () => {
+    if (!haveAuthoritySendMessage) {
+      alert('Not allowed to post message.');
+      return;
+    }
     const nowMilliseconds = Date.now();
     const newChat: Chat = { channel, user, uid: '', chatContent: message, dateMilliseconds: nowMilliseconds };
     await myFirestoreKitChat.add({ channel }, newChat);
@@ -29,6 +35,7 @@ const MessageSender = () => {
           <OutlinedInput
             {...propMessage}
             onKeyDown={messageInputKeyDown}
+            disabled={!haveAuthoritySendMessage}
             endAdornment={
               <InputAdornment position='end'>
                 <Button>

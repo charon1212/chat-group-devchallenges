@@ -1,6 +1,5 @@
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../app/firebase/firebase";
-import { myFirestoreKitUser } from "../firestore/FirestoreUser";
 import { User } from "../type/User";
 import { addNewUser } from "./addNewUser";
 

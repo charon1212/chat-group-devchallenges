@@ -3,7 +3,7 @@ import { Link, Typography } from '@mui/material';
 type Props = { setMail: (value: string) => unknown; setPassword: (value: string) => unknown };
 const TestUser = (props: Props) => {
   const { setMail, setPassword } = props;
-  const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const array = [1, 2, 3, 4, 5, 6];
   const createOnClickHandler = (index: number): React.MouseEventHandler<HTMLAnchorElement> => {
     return (e) => {
       e.preventDefault();

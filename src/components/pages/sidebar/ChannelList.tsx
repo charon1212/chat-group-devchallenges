@@ -40,6 +40,7 @@ const ChannelList = () => {
     );
     dispatch(changeChannel({ channel, channelAuthList: channelAuthorityList }));
   };
+  const searchedChannelList = !searchWord ? channelList : channelList.filter(({ title }) => title.includes(searchWord));
 
   return (
     <>
@@ -63,7 +64,7 @@ const ChannelList = () => {
         </div>
         <div style={{ overflowY: 'scroll' }}>
           <List>
-            {channelList.map((channel, i) => (
+            {searchedChannelList.map((channel, i) => (
               <ListItem key={i}>
                 <ListItemButton
                   onClick={() => {

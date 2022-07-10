@@ -16,9 +16,7 @@ const TestUser = (props: Props) => {
       <div style={{ display: 'flex', flexDirection: 'column', margin: '10px' }}>
         <Typography>↓TestUser for dev↓</Typography>
         {array.map((v, i) => (
-          <>
-            <Link href='#' onClick={createOnClickHandler(v)} key={i}>{`testuser${v}`}</Link>
-          </>
+          <Link href='#' onClick={createOnClickHandler(v)} key={i}>{`testuser${v}`}</Link>
         ))}
       </div>
     </>

@@ -1,5 +1,5 @@
 import { Avatar, Divider, List, ListItem, ListItemAvatar, ListItemText, useTheme } from '@mui/material';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAppSelector } from '../../../app/hooks';
 import { myFirestoreKitChat } from '../../../domain/firestore/FirestoreChat';
 import { myFirestoreKitUser } from '../../../domain/firestore/FirestoreUser';
@@ -32,10 +32,10 @@ const ChatFrame = () => {
               const postChat = chatList[i + 1];
               const setDivider = !postChat || !sameDay(postChat.dateObj, chat.dateObj);
               return (
-                <>
+                <React.Fragment key={i}>
                   <ChatBox chat={chat} />
                   {setDivider ? <DateDivider dateObj={chat.dateObj} /> : ''}
-                </>
+                </React.Fragment>
               );
             })}
             <div ref={ref} />

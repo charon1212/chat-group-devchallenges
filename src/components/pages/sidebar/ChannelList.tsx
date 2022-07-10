@@ -63,18 +63,16 @@ const ChannelList = () => {
         </div>
         <div style={{ overflowY: 'scroll' }}>
           <List>
-            {channelList.map((channel) => (
-              <>
-                <ListItem>
-                  <ListItemButton
-                    onClick={() => {
-                      selectChannel(channel);
-                    }}
-                  >
-                    <ListItemText primary={channel.title} />
-                  </ListItemButton>
-                </ListItem>
-              </>
+            {channelList.map((channel, i) => (
+              <ListItem key={i}>
+                <ListItemButton
+                  onClick={() => {
+                    selectChannel(channel);
+                  }}
+                >
+                  <ListItemText primary={channel.title} />
+                </ListItemButton>
+              </ListItem>
             ))}
           </List>
         </div>

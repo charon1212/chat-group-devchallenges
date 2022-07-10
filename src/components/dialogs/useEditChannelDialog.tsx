@@ -115,7 +115,7 @@ export const useEditChannelDialog = () => {
               </TableHead>
               <TableBody>
                 {authList.map(({ user, type }, i) => (
-                  <TableRow>
+                  <TableRow key={i}>
                     <TableCell>{user.displayName}</TableCell>
                     <TableCell>
                       <SelectAuthority value={type} onChange={onChangeAuthTypeHandler(i)} />
@@ -176,8 +176,8 @@ const SelectAuthority = (props: { value: ChannelAuthType; onChange?: (value: Cha
             if (onChange) onChange(e.target.value as ChannelAuthType);
           }}
         >
-          {channelAuthTypeList.map((v) => (
-            <MenuItem value={v}>{v}</MenuItem>
+          {channelAuthTypeList.map((v,i) => (
+            <MenuItem value={v} key={i}>{v}</MenuItem>
           ))}
         </Select>
       </FormControl>

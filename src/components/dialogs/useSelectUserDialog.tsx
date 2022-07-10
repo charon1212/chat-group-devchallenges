@@ -39,17 +39,15 @@ export const useSelectUserDialog = (param: Param) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {userList.map((user) => (
-                <>
-                  <TableRow>
-                    <TableCell>
-                      <IconButton onClick={onClickSelectIcon(user)}>
-                        <AddIcon fontSize='small' />
-                      </IconButton>
-                    </TableCell>
-                    <TableCell>{user.displayName}</TableCell>
-                  </TableRow>
-                </>
+              {userList.map((user, i) => (
+                <TableRow key={i}>
+                  <TableCell>
+                    <IconButton onClick={onClickSelectIcon(user)}>
+                      <AddIcon fontSize='small' />
+                    </IconButton>
+                  </TableCell>
+                  <TableCell>{user.displayName}</TableCell>
+                </TableRow>
               ))}
             </TableBody>
           </Table>

@@ -188,7 +188,7 @@ const SelectAuthority = (props: { value: ChannelAuthType; onChange?: (value: Cha
 const updateChannelAuthList = async (channel: Channel, beforeAuthList: ChannelAuthority[], afterAuthList: ChannelAuthority[]) => {
   const addChannelAuthList = afterAuthList.filter(({ uid }) => !uid);
   const modifyChannelAuthList = afterAuthList.filter(({ uid }) => uid);
-  const deleteChannelAuthList = beforeAuthList.filter(({ uid }) => afterAuthList.some((a) => a.uid === uid));
+  const deleteChannelAuthList = beforeAuthList.filter(({ uid }) => !afterAuthList.some((a) => a.uid === uid));
   await Promise.all([
     ...addChannelAuthList.map((channelAuth) =>
       myFirestoreKitChannelAuthority.add({ channel }, channelAuth).then((docRef) => {

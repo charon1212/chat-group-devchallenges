@@ -1,6 +1,9 @@
 import SideBar from '../sidebar/SideBar';
 import MainContent from './MainContent';
 
+/**
+ * メイン画面。
+ */
 const Main = () => {
   return (
     <>

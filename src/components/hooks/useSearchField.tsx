@@ -2,6 +2,9 @@ import { TextField, InputAdornment } from '@mui/material';
 import { Search } from '@mui/icons-material';
 import { useState } from 'react';
 
+/**
+ * 検索用テキストボックス
+ */
 export const useSearchField = () => {
   const [searchWord, setSearchWord] = useState('');
   const searchFieldElement = (

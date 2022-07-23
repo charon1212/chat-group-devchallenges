@@ -7,6 +7,9 @@ import { Chat } from '../../../../domain/type/Chat';
 import { selectChannel } from '../../../../lib/redux/slice/channelSlice';
 import { useScrollAt } from '../../../hooks/useScrollAt';
 
+/**
+ * チャット表示部品。
+ */
 const ChatFrame = () => {
   const theme = useTheme();
   const channel = useAppSelector(selectChannel);

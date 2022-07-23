@@ -6,6 +6,9 @@ import AddIcon from '@mui/icons-material/Add';
 type Param = {
   onSelect: (user: User) => unknown;
 };
+/**
+ * ユーザー選択ダイアログ。
+ */
 export const useSelectUserDialog = (param: Param) => {
   const { onSelect } = param;
   const [open, setOpen] = useState(false);

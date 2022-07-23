@@ -10,6 +10,9 @@ import { useTextField } from '../../../hooks/useTextField';
 import AvatarEdit from './AvatarEdit';
 import { useYesNoDialog } from '../../../hooks/useYesNoDialog';
 
+/**
+ * ユーザー情報編集ダイアログ。
+ */
 export const useUserProfileDialog = () => {
   const [open, setOpen] = useState(false);
   const [displayName, setDisplayName, propDisplayName] = useTextField('');

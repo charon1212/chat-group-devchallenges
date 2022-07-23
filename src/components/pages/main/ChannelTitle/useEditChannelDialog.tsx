@@ -30,6 +30,9 @@ import { useSelectUserDialog } from './useSelectUserDialog';
 import { myFirestoreKitUser } from '../../../../lib/firebase/firestore/FirestoreUser';
 import { selectUser, updateProfile } from '../../../../lib/redux/slice/userSlice';
 
+/**
+ * チャンネル編集ダイアログ。
+ */
 export const useEditChannelDialog = () => {
   const [open, setOpen] = useState(false);
   const [title, setTitle, propTitle] = useTextField('');

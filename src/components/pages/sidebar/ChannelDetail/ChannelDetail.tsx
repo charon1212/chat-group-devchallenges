@@ -4,6 +4,9 @@ import { useAppSelector } from '../../../hooks/hooks';
 import { selectChannel } from '../../../../lib/redux/slice/channelSlice';
 import MemberList from './MemberList';
 
+/**
+ * チャンネル詳細表示部品。
+ */
 const ChannelDetail = () => {
   const theme = useTheme();
   const channel = useAppSelector(selectChannel);

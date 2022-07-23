@@ -1,9 +1,12 @@
-import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Auth from './Auth';
 import AuthLoading from './AuthLoading';
 import Main from '../pages/main/Main';
 import AuthTop from '../pages/auth/AuthTop';
 
+/**
+ * ルーター
+ */
 const AppRouter = () => {
   return (
     <>

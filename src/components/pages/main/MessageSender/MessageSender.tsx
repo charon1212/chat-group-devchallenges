@@ -7,6 +7,9 @@ import { myFirestoreKitChat } from '../../../../lib/firebase/firestore/Firestore
 import { Chat } from '../../../../domain/type/Chat';
 import { selectUser } from '../../../../lib/redux/slice/userSlice';
 
+/**
+ * メッセージ送信部品
+ */
 const MessageSender = () => {
   const [message, setMessage, propMessage] = useTextField();
   const channel = useAppSelector(selectChannel);

@@ -5,6 +5,9 @@ import { useSignUpConfirm } from './useSignUpConfirm';
 import { useTextField } from '../../hooks/useTextField';
 import TestUser from './TestUser';
 
+/**
+ * 認証画面
+ */
 const AuthTop = () => {
   const [email, setEmail, propEmail] = useTextField();
   const [password, setPassword, propPassword] = useTextField();

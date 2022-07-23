@@ -6,6 +6,9 @@ import ChannelList from './ChannelList/ChannelList';
 import ChannelDetail from './ChannelDetail/ChannelDetail';
 import UserProfile from './UserProfile/UserProfile';
 
+/**
+ * サイドバー
+ */
 const SideBar = () => {
   const theme = useTheme();
 

@@ -5,6 +5,9 @@ type Props = {
   initialImageUrl: string;
   setter: (file: File) => void;
 };
+/**
+ * アバター編集部品。
+ */
 const AvatarEdit = (props: Props) => {
   const { initialImageUrl, setter } = props;
   const theme = useTheme();

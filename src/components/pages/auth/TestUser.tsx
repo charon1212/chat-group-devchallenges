@@ -1,6 +1,9 @@
 import { Link, Typography } from '@mui/material';
 
 type Props = { setMail: (value: string) => unknown; setPassword: (value: string) => unknown };
+/**
+ * テストユーザー選択部品。
+ */
 const TestUser = (props: Props) => {
   const { setMail, setPassword } = props;
   const array = [1, 2, 3, 4, 5, 6];

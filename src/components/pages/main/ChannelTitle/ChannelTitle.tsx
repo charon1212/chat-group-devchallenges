@@ -5,6 +5,9 @@ import EditIcon from '@mui/icons-material/Edit';
 import { useEditChannelDialog } from './useEditChannelDialog';
 import { selectUser } from '../../../../lib/redux/slice/userSlice';
 
+/**
+ * チャットタイトル表示部品。
+ */
 const ChannelTitle = () => {
   const channel = useAppSelector(selectChannel);
   const user = useAppSelector(selectUser);

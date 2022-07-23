@@ -3,6 +3,9 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signup } from '../../../lib/firebase/auth/signup';
 
+/**
+ * サインアップ確認ダイアログ。
+ */
 export const useSignUpConfirm = () => {
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState('');

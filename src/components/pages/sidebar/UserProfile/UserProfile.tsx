@@ -11,6 +11,9 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
 import { selectUser } from '../../../../lib/redux/slice/userSlice';
 import { resetChannel } from '../../../../lib/redux/slice/channelSlice';
 
+/**
+ * サイドバー下部のログインユーザー表示部品。
+ */
 const UserProfile = () => {
   const theme = useTheme();
   const user = useAppSelector(selectUser);

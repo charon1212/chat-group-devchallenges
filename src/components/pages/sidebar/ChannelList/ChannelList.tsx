@@ -11,6 +11,9 @@ import { selectUser } from '../../../../lib/redux/slice/userSlice';
 import { useCreateChannelDialog } from './useCreateChannelDialog';
 import { useSearchField } from '../../../hooks/useSearchField';
 
+/**
+ * チャンネル一覧表示部品。
+ */
 const ChannelList = () => {
   const theme = useTheme();
 

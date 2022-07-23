@@ -4,6 +4,9 @@ import ChannelTitle from './ChannelTitle/ChannelTitle';
 import ChatFrame from './ChatFrame/ChatFrame';
 import MessageSender from './MessageSender/MessageSender';
 
+/**
+ * メイン画面のメイン領域を描画する部品。
+ */
 const MainContent = () => {
   const channel = useAppSelector(selectChannel);
 

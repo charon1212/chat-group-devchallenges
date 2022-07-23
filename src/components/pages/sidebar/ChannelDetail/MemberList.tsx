@@ -4,6 +4,9 @@ import { ChannelAuthType } from '../../../../domain/type/ChannelAuthority';
 import { User } from '../../../../domain/type/User';
 import { selectChannel } from '../../../../lib/redux/slice/channelSlice';
 
+/**
+ * チャンネルメンバー一覧部品。
+ */
 const MemberList = () => {
   const theme = useTheme();
   const channel = useAppSelector(selectChannel);

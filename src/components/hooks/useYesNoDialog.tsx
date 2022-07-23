@@ -8,6 +8,9 @@ type YesNoDialogParam = {
   onClickNo?: (closeDialog: () => void) => unknown;
 };
 
+/**
+ * Yes/Noダイアログ。
+ */
 export const useYesNoDialog = (param: YesNoDialogParam) => {
   const { title, message, onClickYes, onClickNo } = param;
   const [open, setOpen] = useState(false);

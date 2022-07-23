@@ -10,6 +10,9 @@ import { User } from '../../../../domain/type/User';
 import { selectUser, updateProfile } from '../../../../lib/redux/slice/userSlice';
 import { useTextField } from '../../../hooks/useTextField';
 
+/**
+ * チャンネル作成ダイアログ。
+ */
 export const useCreateChannelDialog = () => {
   const [open, setOpen] = useState(false);
   const [title, setTitle, propTitle] = useTextField('');

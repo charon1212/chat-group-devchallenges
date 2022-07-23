@@ -8,8 +8,8 @@ import { useState } from 'react';
 import { useUserProfileDialog } from '../../dialogs/useUserProfileDialog';
 import { signout } from '../../../domain/firebase/signout';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-import { selectUser } from '../../../features/user/userSlice';
-import { resetChannel } from '../../../features/channel/channelSlice';
+import { selectUser } from '../../../lib/redux/slice/userSlice';
+import { resetChannel } from '../../../lib/redux/slice/channelSlice';
 
 const UserProfile = () => {
   const theme = useTheme();

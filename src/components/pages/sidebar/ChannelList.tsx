@@ -6,8 +6,8 @@ import { myFirestoreKitChannel } from '../../../lib/firebase/firestore/Firestore
 import { myFirestoreKitChannelAuthority } from '../../../lib/firebase/firestore/FirestoreChannelAuthority';
 import { myFirestoreKitUser } from '../../../lib/firebase/firestore/FirestoreUser';
 import { Channel } from '../../../domain/type/Channel';
-import { changeChannel } from '../../../features/channel/channelSlice';
-import { selectUser } from '../../../features/user/userSlice';
+import { changeChannel } from '../../../lib/redux/slice/channelSlice';
+import { selectUser } from '../../../lib/redux/slice/userSlice';
 import { useCreateChannelDialog } from '../../dialogs/useCreateChannelDialog';
 import { useSearchField } from '../../hooks/useSearchField';
 

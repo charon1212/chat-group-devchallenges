@@ -5,7 +5,7 @@ import { storage } from '../../lib/firebase/firebase';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { myFirestoreKitUser } from '../../lib/firebase/firestore/FirestoreUser';
 import { User } from '../../domain/type/User';
-import { selectUser, updateProfile } from '../../features/user/userSlice';
+import { selectUser, updateProfile } from '../../lib/redux/slice/userSlice';
 import { useTextField } from '../hooks/useTextField';
 import AvatarEdit from './AvatarEdit';
 import { useYesNoDialog } from './useYesNoDialog';

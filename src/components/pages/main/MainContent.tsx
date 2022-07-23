@@ -1,5 +1,5 @@
 import { useAppSelector } from '../../../app/hooks';
-import { selectChannel } from '../../../features/channel/channelSlice';
+import { selectChannel } from '../../../lib/redux/slice/channelSlice';
 import ChannelTitle from './ChannelTitle';
 import ChatFrame from './ChatFrame';
 import MessageSender from './MessageSender';

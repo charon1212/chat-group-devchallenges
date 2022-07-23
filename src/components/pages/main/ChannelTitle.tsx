@@ -1,9 +1,9 @@
 import { IconButton, useTheme } from '@mui/material';
 import { useAppSelector } from '../../../app/hooks';
-import { selectChannel } from '../../../features/channel/channelSlice';
+import { selectChannel } from '../../../lib/redux/slice/channelSlice';
 import EditIcon from '@mui/icons-material/Edit';
 import { useEditChannelDialog } from '../../dialogs/useEditChannelDialog';
-import { selectUser } from '../../../features/user/userSlice';
+import { selectUser } from '../../../lib/redux/slice/userSlice';
 
 const ChannelTitle = () => {
   const channel = useAppSelector(selectChannel);

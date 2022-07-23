@@ -22,13 +22,13 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { myFirestoreKitChannel } from '../../lib/firebase/firestore/FirestoreChannel';
 import { Channel } from '../../domain/type/Channel';
 import { ChannelAuthority, ChannelAuthType } from '../../domain/type/ChannelAuthority';
-import { selectChannel, updateChannelAuthority, updateChannel } from '../../features/channel/channelSlice';
+import { selectChannel, updateChannelAuthority, updateChannel } from '../../lib/redux/slice/channelSlice';
 import { useTextField } from '../hooks/useTextField';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { myFirestoreKitChannelAuthority } from '../../lib/firebase/firestore/FirestoreChannelAuthority';
 import { useSelectUserDialog } from './useSelectUserDialog';
 import { myFirestoreKitUser } from '../../lib/firebase/firestore/FirestoreUser';
-import { selectUser, updateProfile } from '../../features/user/userSlice';
+import { selectUser, updateProfile } from '../../lib/redux/slice/userSlice';
 
 export const useEditChannelDialog = () => {
   const [open, setOpen] = useState(false);

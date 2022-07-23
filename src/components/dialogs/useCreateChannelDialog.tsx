@@ -7,7 +7,7 @@ import { myFirestoreKitUser } from '../../lib/firebase/firestore/FirestoreUser';
 import { Channel } from '../../domain/type/Channel';
 import { ChannelAuthority } from '../../domain/type/ChannelAuthority';
 import { User } from '../../domain/type/User';
-import { selectUser, updateProfile } from '../../features/user/userSlice';
+import { selectUser, updateProfile } from '../../lib/redux/slice/userSlice';
 import { useTextField } from '../hooks/useTextField';
 
 export const useCreateChannelDialog = () => {

@@ -1,7 +1,7 @@
 import { Link, Typography, useTheme } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useAppSelector } from '../../../app/hooks';
-import { selectChannel } from '../../../features/channel/channelSlice';
+import { selectChannel } from '../../../lib/redux/slice/channelSlice';
 import ChannelList from './ChannelList';
 import ChannelDetail from './ChannelDetail';
 import UserProfile from './UserProfile';

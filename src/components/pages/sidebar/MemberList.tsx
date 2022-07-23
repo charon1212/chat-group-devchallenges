@@ -2,7 +2,7 @@ import { Avatar, Typography, useTheme } from '@mui/material';
 import { useAppSelector } from '../../../app/hooks';
 import { ChannelAuthType } from '../../../domain/type/ChannelAuthority';
 import { User } from '../../../domain/type/User';
-import { selectChannel } from '../../../features/channel/channelSlice';
+import { selectChannel } from '../../../lib/redux/slice/channelSlice';
 
 const MemberList = () => {
   const theme = useTheme();

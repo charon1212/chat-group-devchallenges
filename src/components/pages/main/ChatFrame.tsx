@@ -4,7 +4,7 @@ import { useAppSelector } from '../../../app/hooks';
 import { myFirestoreKitChat } from '../../../lib/firebase/firestore/FirestoreChat';
 import { myFirestoreKitUser } from '../../../lib/firebase/firestore/FirestoreUser';
 import { Chat } from '../../../domain/type/Chat';
-import { selectChannel } from '../../../features/channel/channelSlice';
+import { selectChannel } from '../../../lib/redux/slice/channelSlice';
 import { useScrollAt } from '../../hooks/useScrollAt';
 
 const ChatFrame = () => {

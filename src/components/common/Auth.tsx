@@ -1,7 +1,7 @@
 import React, { ReactNode, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Navigate } from 'react-router-dom';
-import { login, logout } from '../..//features/user/userSlice';
+import { login, logout } from '../../lib/redux/slice/userSlice';
 import { auth } from '../../lib/firebase/firebase';
 import { myFirestoreKitUser } from '../../lib/firebase/firestore/FirestoreUser';
 

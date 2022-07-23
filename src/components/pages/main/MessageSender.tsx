@@ -1,11 +1,11 @@
 import { Button, FormControl, IconButton, InputAdornment, OutlinedInput } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import { useAppSelector } from '../../../app/hooks';
-import { selectChannel } from '../../../features/channel/channelSlice';
+import { selectChannel } from '../../../lib/redux/slice/channelSlice';
 import { useTextField } from '../../hooks/useTextField';
 import { myFirestoreKitChat } from '../../../lib/firebase/firestore/FirestoreChat';
 import { Chat } from '../../../domain/type/Chat';
-import { selectUser } from '../../../features/user/userSlice';
+import { selectUser } from '../../../lib/redux/slice/userSlice';
 
 const MessageSender = () => {
   const [message, setMessage, propMessage] = useTextField();

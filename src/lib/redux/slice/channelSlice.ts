@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "../../app/store";
-import { Channel } from "../../domain/type/Channel";
-import { ChannelAuthority } from "../../domain/type/ChannelAuthority";
+import { RootState } from "../store";
+import { Channel } from "../../../domain/type/Channel";
+import { ChannelAuthority } from "../../../domain/type/ChannelAuthority";
 
 const initialState: Channel & { channelAuthList: ChannelAuthority[] } = {
   uid: '',

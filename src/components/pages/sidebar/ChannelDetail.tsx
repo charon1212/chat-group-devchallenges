@@ -1,7 +1,7 @@
 import { useTheme } from '@mui/material';
 import React from 'react';
 import { useAppSelector } from '../../../app/hooks';
-import { selectChannel } from '../../../features/channel/channelSlice';
+import { selectChannel } from '../../../lib/redux/slice/channelSlice';
 import MemberList from './MemberList';
 
 const ChannelDetail = () => {

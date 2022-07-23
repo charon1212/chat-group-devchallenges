@@ -1,15 +1,15 @@
-import { Avatar, Divider, Link, ListItemIcon, Menu, MenuItem, Typography, useTheme } from '@mui/material';
+import { Avatar, Link, Typography, useTheme } from '@mui/material';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ForumIcon from '@mui/icons-material/Forum';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import { useState } from 'react';
 import { useUserProfileDialog } from './useUserProfileDialog';
 import { signout } from '../../../../lib/firebase/auth/signout';
 import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
 import { selectUser } from '../../../../lib/redux/slice/userSlice';
 import { resetChannel } from '../../../../lib/redux/slice/channelSlice';
+import { usePopupMenu } from './usePopupMenu';
 
 /**
  * サイドバー下部のログインユーザー表示部品。
@@ -19,14 +19,37 @@ const UserProfile = () => {
   const user = useAppSelector(selectUser);
   const dispatch = useAppDispatch();
 
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const menuItems = [
+    {
+      menuText: 'My Profile',
+      icon: <AccountCircleIcon />,
+      onClick: () => {
+        openUserProfileDialog();
+      },
+    },
+    {
+      menuText: 'Tweeter',
+      icon: <ForumIcon />,
+      onClick: () => {},
+      divideBelow: true,
+    },
+    {
+      menuText: 'Sign Out',
+      icon: <ExitToAppIcon />,
+      onClick: () => {
+        signout(() => {
+          dispatch(resetChannel());
+        });
+      },
+    },
+  ];
+  const [, setAnchorEl, menuIsOpen, PopupMenu] = usePopupMenu({ menuItems });
+  const { openUserProfileDialog, UserProfileDialog } = useUserProfileDialog();
+
   const linkClickHandler = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     e.preventDefault();
     setAnchorEl(e.currentTarget);
   };
-
-  const { openUserProfileDialog, UserProfileDialog } = useUserProfileDialog();
-
   return (
     <>
       <div style={{ margin: theme.spacing(2) }}>
@@ -41,49 +64,10 @@ const UserProfile = () => {
           >
             <Avatar alt='avatar image' src={user.photoUrl} />
             <Typography style={{ marginLeft: '20px' }}>{user.displayName}</Typography>
-            {anchorEl ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
+            {menuIsOpen ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
           </div>
         </Link>
-        <Menu
-          anchorEl={anchorEl}
-          keepMounted
-          open={Boolean(anchorEl)}
-          anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-          transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-          onClose={() => {
-            setAnchorEl(null);
-          }}
-        >
-          <MenuItem
-            onClick={() => {
-              openUserProfileDialog();
-            }}
-          >
-            <ListItemIcon>
-              <AccountCircleIcon />
-            </ListItemIcon>
-            My Profile
-          </MenuItem>
-          <MenuItem>
-            <ListItemIcon>
-              <ForumIcon />
-            </ListItemIcon>
-            Tweeter
-          </MenuItem>
-          <Divider variant='inset' component='li' />
-          <MenuItem
-            onClick={() => {
-              signout(() => {
-                dispatch(resetChannel());
-              });
-            }}
-          >
-            <ListItemIcon>
-              <ExitToAppIcon />
-            </ListItemIcon>
-            Sign Out
-          </MenuItem>
-        </Menu>
+        {PopupMenu}
       </div>
       {UserProfileDialog}
     </>

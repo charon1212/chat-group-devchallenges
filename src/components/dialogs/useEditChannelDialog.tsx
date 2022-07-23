@@ -19,15 +19,15 @@ import {
 } from '@mui/material';
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { myFirestoreKitChannel } from '../../domain/firestore/FirestoreChannel';
+import { myFirestoreKitChannel } from '../../lib/firebase/firestore/FirestoreChannel';
 import { Channel } from '../../domain/type/Channel';
 import { ChannelAuthority, ChannelAuthType } from '../../domain/type/ChannelAuthority';
 import { selectChannel, updateChannelAuthority, updateChannel } from '../../features/channel/channelSlice';
 import { useTextField } from '../hooks/useTextField';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { myFirestoreKitChannelAuthority } from '../../domain/firestore/FirestoreChannelAuthority';
+import { myFirestoreKitChannelAuthority } from '../../lib/firebase/firestore/FirestoreChannelAuthority';
 import { useSelectUserDialog } from './useSelectUserDialog';
-import { myFirestoreKitUser } from '../../domain/firestore/FirestoreUser';
+import { myFirestoreKitUser } from '../../lib/firebase/firestore/FirestoreUser';
 import { selectUser, updateProfile } from '../../features/user/userSlice';
 
 export const useEditChannelDialog = () => {

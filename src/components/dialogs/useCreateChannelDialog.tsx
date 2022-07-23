@@ -1,9 +1,9 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, useTheme } from '@mui/material';
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { myFirestoreKitChannel } from '../../domain/firestore/FirestoreChannel';
-import { myFirestoreKitChannelAuthority } from '../../domain/firestore/FirestoreChannelAuthority';
-import { myFirestoreKitUser } from '../../domain/firestore/FirestoreUser';
+import { myFirestoreKitChannel } from '../../lib/firebase/firestore/FirestoreChannel';
+import { myFirestoreKitChannelAuthority } from '../../lib/firebase/firestore/FirestoreChannelAuthority';
+import { myFirestoreKitUser } from '../../lib/firebase/firestore/FirestoreUser';
 import { Channel } from '../../domain/type/Channel';
 import { ChannelAuthority } from '../../domain/type/ChannelAuthority';
 import { User } from '../../domain/type/User';

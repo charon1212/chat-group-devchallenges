@@ -1,6 +1,6 @@
 import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, query, QueryConstraint, setDoc } from "firebase/firestore";
-import { db } from "../../app/firebase/firebase";
-import { log } from "../util/log";
+import { db } from "../firebase";
+import { log } from "../../../domain/util/log";
 
 export type FirestoreKitParam<Domain, Collection extends Object, PathParam> = {
   collectionPath: (pathParam: PathParam) => string,

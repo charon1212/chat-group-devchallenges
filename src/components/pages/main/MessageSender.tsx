@@ -3,7 +3,7 @@ import SendIcon from '@mui/icons-material/Send';
 import { useAppSelector } from '../../../app/hooks';
 import { selectChannel } from '../../../features/channel/channelSlice';
 import { useTextField } from '../../hooks/useTextField';
-import { myFirestoreKitChat } from '../../../domain/firestore/FirestoreChat';
+import { myFirestoreKitChat } from '../../../lib/firebase/firestore/FirestoreChat';
 import { Chat } from '../../../domain/type/Chat';
 import { selectUser } from '../../../features/user/userSlice';
 

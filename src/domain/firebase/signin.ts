@@ -1,6 +1,6 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../app/firebase/firebase";
-import { myFirestoreKitUser } from "../firestore/FirestoreUser";
+import { auth } from "../../lib/firebase/firebase";
+import { myFirestoreKitUser } from "../../lib/firebase/firestore/FirestoreUser";
 import { User } from "../type/User";
 import { addNewUser } from "./addNewUser";
 

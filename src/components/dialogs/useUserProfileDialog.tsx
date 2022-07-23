@@ -1,9 +1,9 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, Typography, useTheme } from '@mui/material';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { useState } from 'react';
-import { storage } from '../../app/firebase/firebase';
+import { storage } from '../../lib/firebase/firebase';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { myFirestoreKitUser } from '../../domain/firestore/FirestoreUser';
+import { myFirestoreKitUser } from '../../lib/firebase/firestore/FirestoreUser';
 import { User } from '../../domain/type/User';
 import { selectUser, updateProfile } from '../../features/user/userSlice';
 import { useTextField } from '../hooks/useTextField';

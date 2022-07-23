@@ -1,5 +1,5 @@
-import { Channel } from "../type/Channel";
-import { Chat } from "../type/Chat";
+import { Channel } from "../../../domain/type/Channel";
+import { Chat } from "../../../domain/type/Chat";
 import { MyFirestoreKit } from "./MyFirestoreKit";
 
 export type CollectionChat = {

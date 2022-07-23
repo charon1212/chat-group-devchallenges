@@ -1,4 +1,4 @@
-import { Channel } from "../type/Channel";
+import { Channel } from "../../../domain/type/Channel";
 import { MyFirestoreKit } from "./MyFirestoreKit";
 
 export type CollectionChannel = {

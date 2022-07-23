@@ -1,5 +1,5 @@
-import { Channel } from "../type/Channel";
-import { ChannelAuthority, ChannelAuthType } from "../type/ChannelAuthority";
+import { Channel } from "../../../domain/type/Channel";
+import { ChannelAuthority, ChannelAuthType } from "../../../domain/type/ChannelAuthority";
 import { MyFirestoreKit } from "./MyFirestoreKit";
 
 export type CollectionChannelAuthority = {

@@ -1,4 +1,4 @@
-import { User } from "../type/User";
+import { User } from "../../../domain/type/User";
 import { MyFirestoreKit } from "./MyFirestoreKit";
 
 export type CollectionUser = {

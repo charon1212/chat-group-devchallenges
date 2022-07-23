@@ -73,7 +73,7 @@ export const useUserProfileDialog = () => {
               </td>
               <td style={{ padding: theme.spacing(1) }}>
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
-                  <AvatarEdit initialImageUrl='' setter={setAvatarImage} />
+                  <AvatarEdit initialImageUrl={user.photoUrl} setter={setAvatarImage} />
                 </div>
               </td>
             </tr>

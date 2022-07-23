@@ -1,6 +1,6 @@
 import { Avatar, Divider, List, ListItem, ListItemAvatar, ListItemText, useTheme } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { useAppSelector } from '../../../app/hooks';
+import { useAppSelector } from '../../hooks/hooks';
 import { myFirestoreKitChat } from '../../../lib/firebase/firestore/FirestoreChat';
 import { myFirestoreKitUser } from '../../../lib/firebase/firestore/FirestoreUser';
 import { Chat } from '../../../domain/type/Chat';

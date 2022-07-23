@@ -1,5 +1,5 @@
 import { Avatar, Typography, useTheme } from '@mui/material';
-import { useAppSelector } from '../../../app/hooks';
+import { useAppSelector } from '../../hooks/hooks';
 import { ChannelAuthType } from '../../../domain/type/ChannelAuthority';
 import { User } from '../../../domain/type/User';
 import { selectChannel } from '../../../lib/redux/slice/channelSlice';

@@ -1,6 +1,6 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, useTheme } from '@mui/material';
 import { useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { myFirestoreKitChannel } from '../../lib/firebase/firestore/FirestoreChannel';
 import { myFirestoreKitChannelAuthority } from '../../lib/firebase/firestore/FirestoreChannelAuthority';
 import { myFirestoreKitUser } from '../../lib/firebase/firestore/FirestoreUser';

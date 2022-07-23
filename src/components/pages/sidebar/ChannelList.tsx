@@ -1,7 +1,7 @@
 import { Add } from '@mui/icons-material';
 import { IconButton, List, ListItem, ListItemButton, ListItemText, Typography, FormControl, useTheme } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { myFirestoreKitChannel } from '../../../lib/firebase/firestore/FirestoreChannel';
 import { myFirestoreKitChannelAuthority } from '../../../lib/firebase/firestore/FirestoreChannelAuthority';
 import { myFirestoreKitUser } from '../../../lib/firebase/firestore/FirestoreUser';

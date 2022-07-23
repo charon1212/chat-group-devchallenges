@@ -7,7 +7,7 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { useState } from 'react';
 import { useUserProfileDialog } from '../../dialogs/useUserProfileDialog';
 import { signout } from '../../../lib/firebase/auth/signout';
-import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { selectUser } from '../../../lib/redux/slice/userSlice';
 import { resetChannel } from '../../../lib/redux/slice/channelSlice';
 

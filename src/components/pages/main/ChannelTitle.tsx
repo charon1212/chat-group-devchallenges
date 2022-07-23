@@ -1,5 +1,5 @@
 import { IconButton, useTheme } from '@mui/material';
-import { useAppSelector } from '../../../app/hooks';
+import { useAppSelector } from '../../hooks/hooks';
 import { selectChannel } from '../../../lib/redux/slice/channelSlice';
 import EditIcon from '@mui/icons-material/Edit';
 import { useEditChannelDialog } from '../../dialogs/useEditChannelDialog';

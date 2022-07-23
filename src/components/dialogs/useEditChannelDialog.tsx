@@ -18,7 +18,7 @@ import {
   useTheme,
 } from '@mui/material';
 import { useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { myFirestoreKitChannel } from '../../lib/firebase/firestore/FirestoreChannel';
 import { Channel } from '../../domain/type/Channel';
 import { ChannelAuthority, ChannelAuthType } from '../../domain/type/ChannelAuthority';

@@ -2,7 +2,7 @@ import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, T
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { useState } from 'react';
 import { storage } from '../../lib/firebase/firebase';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { myFirestoreKitUser } from '../../lib/firebase/firestore/FirestoreUser';
 import { User } from '../../domain/type/User';
 import { selectUser, updateProfile } from '../../lib/redux/slice/userSlice';

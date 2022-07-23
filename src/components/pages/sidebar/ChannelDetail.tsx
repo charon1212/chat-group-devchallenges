@@ -1,6 +1,6 @@
 import { useTheme } from '@mui/material';
 import React from 'react';
-import { useAppSelector } from '../../../app/hooks';
+import { useAppSelector } from '../../hooks/hooks';
 import { selectChannel } from '../../../lib/redux/slice/channelSlice';
 import MemberList from './MemberList';
 

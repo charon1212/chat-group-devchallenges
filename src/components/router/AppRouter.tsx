@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
-import Auth from './components/common/Auth';
-import AuthLoading from './components/common/AuthLoading';
-import Main from './components/pages/main/Main';
-import AuthTop from './components/pages/signin/AuthTop';
+import Auth from './Auth';
+import AuthLoading from './AuthLoading';
+import Main from '../pages/main/Main';
+import AuthTop from '../pages/signin/AuthTop';
 
 const AppRouter = () => {
   return (

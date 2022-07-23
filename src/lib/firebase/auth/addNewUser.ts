@@ -1,9 +1,9 @@
 import { User as FirebaseUser } from "firebase/auth";
 import { where } from "firebase/firestore";
-import { myFirestoreKitChannel } from "../../lib/firebase/firestore/FirestoreChannel";
-import { myFirestoreKitChannelAuthority } from "../../lib/firebase/firestore/FirestoreChannelAuthority";
-import { myFirestoreKitUser } from "../../lib/firebase/firestore/FirestoreUser";
-import { User } from "../type/User";
+import { myFirestoreKitChannel } from "../firestore/FirestoreChannel";
+import { myFirestoreKitChannelAuthority } from "../firestore/FirestoreChannelAuthority";
+import { myFirestoreKitUser } from "../firestore/FirestoreUser";
+import { User } from "../../../domain/type/User";
 
 export const addNewUser = async (firebaseUser: FirebaseUser): Promise<User> => {
   const defaultChannels = await myFirestoreKitChannel.find({}, [where("isDefault", "==", true)]);

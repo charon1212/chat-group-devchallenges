@@ -1,6 +1,6 @@
 import { Button, Paper, TextField, Typography, useTheme } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { signin } from '../../../domain/firebase/signin';
+import { signin } from '../../../lib/firebase/auth/signin';
 import { useSignUpConfirm } from '../../dialogs/useSignUpConfirm';
 import { useTextField } from '../../hooks/useTextField';
 import TestUser from './TestUser';

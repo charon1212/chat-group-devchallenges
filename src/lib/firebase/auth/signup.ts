@@ -1,6 +1,6 @@
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../lib/firebase/firebase";
-import { User } from "../type/User";
+import { auth } from "../firebase";
+import { User } from "../../../domain/type/User";
 import { addNewUser } from "./addNewUser";
 
 export type ParamSignup = { email: string, password: string };

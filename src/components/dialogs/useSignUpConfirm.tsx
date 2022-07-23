@@ -1,7 +1,7 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { signup } from '../../domain/firebase/signup';
+import { signup } from '../../lib/firebase/auth/signup';
 
 export const useSignUpConfirm = () => {
   const [open, setOpen] = useState(false);

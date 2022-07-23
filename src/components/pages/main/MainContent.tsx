@@ -1,8 +1,8 @@
 import { useAppSelector } from '../../hooks/hooks';
 import { selectChannel } from '../../../lib/redux/slice/channelSlice';
-import ChannelTitle from './ChannelTitle';
-import ChatFrame from './ChatFrame';
-import MessageSender from './MessageSender';
+import ChannelTitle from './ChannelTitle/ChannelTitle';
+import ChatFrame from './ChatFrame/ChatFrame';
+import MessageSender from './MessageSender/MessageSender';
 
 const MainContent = () => {
   const channel = useAppSelector(selectChannel);

@@ -1,6 +1,6 @@
 import { Dialog, DialogContent, DialogTitle, IconButton, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
 import { useState } from 'react';
-import { User } from '../../domain/type/User';
+import { User } from '../../../../domain/type/User';
 import AddIcon from '@mui/icons-material/Add';
 
 type Param = {

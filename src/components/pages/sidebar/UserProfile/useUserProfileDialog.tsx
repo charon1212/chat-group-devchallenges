@@ -1,14 +1,14 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, Typography, useTheme } from '@mui/material';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { useState } from 'react';
-import { storage } from '../../lib/firebase/firebase';
-import { useAppDispatch, useAppSelector } from '../hooks/hooks';
-import { myFirestoreKitUser } from '../../lib/firebase/firestore/FirestoreUser';
-import { User } from '../../domain/type/User';
-import { selectUser, updateProfile } from '../../lib/redux/slice/userSlice';
-import { useTextField } from '../hooks/useTextField';
+import { storage } from '../../../../lib/firebase/firebase';
+import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
+import { myFirestoreKitUser } from '../../../../lib/firebase/firestore/FirestoreUser';
+import { User } from '../../../../domain/type/User';
+import { selectUser, updateProfile } from '../../../../lib/redux/slice/userSlice';
+import { useTextField } from '../../../hooks/useTextField';
 import AvatarEdit from './AvatarEdit';
-import { useYesNoDialog } from './useYesNoDialog';
+import { useYesNoDialog } from '../../../hooks/useYesNoDialog';
 
 export const useUserProfileDialog = () => {
   const [open, setOpen] = useState(false);

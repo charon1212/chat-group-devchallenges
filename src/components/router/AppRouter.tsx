@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-d
 import Auth from './Auth';
 import AuthLoading from './AuthLoading';
 import Main from '../pages/main/Main';
-import AuthTop from '../pages/signin/AuthTop';
+import AuthTop from '../pages/auth/AuthTop';
 
 const AppRouter = () => {
   return (

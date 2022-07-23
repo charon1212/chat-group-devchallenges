@@ -1,15 +1,15 @@
 import { Add } from '@mui/icons-material';
 import { IconButton, List, ListItem, ListItemButton, ListItemText, Typography, FormControl, useTheme } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { myFirestoreKitChannel } from '../../../lib/firebase/firestore/FirestoreChannel';
-import { myFirestoreKitChannelAuthority } from '../../../lib/firebase/firestore/FirestoreChannelAuthority';
-import { myFirestoreKitUser } from '../../../lib/firebase/firestore/FirestoreUser';
-import { Channel } from '../../../domain/type/Channel';
-import { changeChannel } from '../../../lib/redux/slice/channelSlice';
-import { selectUser } from '../../../lib/redux/slice/userSlice';
-import { useCreateChannelDialog } from '../../dialogs/useCreateChannelDialog';
-import { useSearchField } from '../../hooks/useSearchField';
+import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
+import { myFirestoreKitChannel } from '../../../../lib/firebase/firestore/FirestoreChannel';
+import { myFirestoreKitChannelAuthority } from '../../../../lib/firebase/firestore/FirestoreChannelAuthority';
+import { myFirestoreKitUser } from '../../../../lib/firebase/firestore/FirestoreUser';
+import { Channel } from '../../../../domain/type/Channel';
+import { changeChannel } from '../../../../lib/redux/slice/channelSlice';
+import { selectUser } from '../../../../lib/redux/slice/userSlice';
+import { useCreateChannelDialog } from './useCreateChannelDialog';
+import { useSearchField } from '../../../hooks/useSearchField';
 
 const ChannelList = () => {
   const theme = useTheme();

@@ -2,9 +2,9 @@ import { Link, Typography, useTheme } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useAppSelector } from '../../hooks/hooks';
 import { selectChannel } from '../../../lib/redux/slice/channelSlice';
-import ChannelList from './ChannelList';
-import ChannelDetail from './ChannelDetail';
-import UserProfile from './UserProfile';
+import ChannelList from './ChannelList/ChannelList';
+import ChannelDetail from './ChannelDetail/ChannelDetail';
+import UserProfile from './UserProfile/UserProfile';
 
 const SideBar = () => {
   const theme = useTheme();

@@ -1,14 +1,14 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, useTheme } from '@mui/material';
 import { useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../hooks/hooks';
-import { myFirestoreKitChannel } from '../../lib/firebase/firestore/FirestoreChannel';
-import { myFirestoreKitChannelAuthority } from '../../lib/firebase/firestore/FirestoreChannelAuthority';
-import { myFirestoreKitUser } from '../../lib/firebase/firestore/FirestoreUser';
-import { Channel } from '../../domain/type/Channel';
-import { ChannelAuthority } from '../../domain/type/ChannelAuthority';
-import { User } from '../../domain/type/User';
-import { selectUser, updateProfile } from '../../lib/redux/slice/userSlice';
-import { useTextField } from '../hooks/useTextField';
+import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
+import { myFirestoreKitChannel } from '../../../../lib/firebase/firestore/FirestoreChannel';
+import { myFirestoreKitChannelAuthority } from '../../../../lib/firebase/firestore/FirestoreChannelAuthority';
+import { myFirestoreKitUser } from '../../../../lib/firebase/firestore/FirestoreUser';
+import { Channel } from '../../../../domain/type/Channel';
+import { ChannelAuthority } from '../../../../domain/type/ChannelAuthority';
+import { User } from '../../../../domain/type/User';
+import { selectUser, updateProfile } from '../../../../lib/redux/slice/userSlice';
+import { useTextField } from '../../../hooks/useTextField';
 
 export const useCreateChannelDialog = () => {
   const [open, setOpen] = useState(false);

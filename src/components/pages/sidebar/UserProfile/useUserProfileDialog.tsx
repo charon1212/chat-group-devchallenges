@@ -9,6 +9,7 @@ import { selectUser, updateProfile } from '../../../../lib/redux/slice/userSlice
 import { useTextField } from '../../../hooks/useTextField';
 import AvatarEdit from './AvatarEdit';
 import { useYesNoDialog } from '../../../hooks/useYesNoDialog';
+import { uploadFile } from '../../../../lib/firebase/storage/uploadFile';
 
 /**
  * ユーザー情報編集ダイアログ。
@@ -27,19 +28,16 @@ export const useUserProfileDialog = () => {
     onClickYes: async (closeDialog) => {
       const uploadAvatarImageUrl = await uploadFileFirestoreStorage(avatarImage, `AvatarImage-${user.uid}`);
       const newUser: User = {
-        uid: user.uid,
+        ...user,
         displayName: displayName || user.displayName,
         photoUrl: uploadAvatarImageUrl || user.photoUrl,
-        accessibleChannel: user.accessibleChannel,
       };
       await myFirestoreKitUser.set({}, user.uid, newUser);
       dispatch(updateProfile(newUser));
       closeDialog();
       setOpen(false);
     },
-    onClickNo: (closeDialog) => {
-      closeDialog();
-    },
+    onClickNo: (closeDialog) => closeDialog(),
   });
 
   const openUserProfileDialog = () => {
@@ -50,12 +48,7 @@ export const useUserProfileDialog = () => {
 
   const UserProfileDialog = (
     <>
-      <Dialog
-        open={open}
-        onClose={() => {
-          setOpen(false);
-        }}
-      >
+      <Dialog open={open} onClose={() => setOpen(false)}>
         <DialogTitle>Edit User Profile</DialogTitle>
         <DialogContent>
           <table>
@@ -80,20 +73,8 @@ export const useUserProfileDialog = () => {
           </table>
         </DialogContent>
         <DialogActions>
-          <Button
-            onClick={() => {
-              openYesNoDialog();
-            }}
-          >
-            OK
-          </Button>
-          <Button
-            onClick={() => {
-              setOpen(false);
-            }}
-          >
-            Cancel
-          </Button>
+          <Button onClick={() => openYesNoDialog()}>OK</Button>
+          <Button onClick={() => setOpen(false)}>Cancel</Button>
         </DialogActions>
       </Dialog>
       {yesNoDialog}
@@ -105,7 +86,7 @@ export const useUserProfileDialog = () => {
 
 const uploadFileFirestoreStorage = async (file: File | undefined, fileName: string) => {
   if (!file) return undefined;
-  const snapshot = await uploadBytes(ref(storage, fileName), file);
+  const snapshot = await uploadFile(file, fileName);
   const downloadUrl = await getDownloadURL(snapshot.ref);
   return downloadUrl;
 };
